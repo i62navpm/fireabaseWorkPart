@@ -1,0 +1,17 @@
+{
+  "version": "0.0.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "create": {
+      "homepage": "https://github.com/i62navpm/firebaseWorkPart#readme",
+      "license": "MIT"
+    },
+    "version": {
+      "allowBranch": ["master"],
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "message": "chore(release): publish %s"
+    }
+  }
+}

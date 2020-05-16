@@ -1,0 +1,59 @@
+{
+  "name": "@i62navpm/work-part",
+  "description": "Work part with firebase",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i62navpm/firebaseWorkPart.git"
+  },
+  "keywords": [
+    "vue",
+    "google-cloud",
+    "cloud-build",
+    "firebase",
+    "lerna"
+  ],
+  "author": "Manuel Navarro Pérez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/i62navpm/firebaseWorkPart/issues"
+  },
+  "homepage": "https://github.com/i62navpm/firebaseWorkPart#readme",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional",
+      "@commitlint/config-lerna-scopes"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{json,md}": "prettier --write"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/config-lerna-scopes": "^8.3.4",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.2.5",
+    "lerna": "^3.21.0",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5"
+  }
+}
