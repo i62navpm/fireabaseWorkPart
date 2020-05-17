@@ -40,6 +40,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Running test:unit
-        run: lerna run unit:test -- --ci
+        run: npx lerna run unit:test -- --ci
       - name: Running test:e2e
-        run: lerna run test:e2e -- --headless
+        run: npx lerna run test:e2e -- --headless
