@@ -40,9 +40,9 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Running test:unit
-        run: npx lerna run unit:test -- --ci --coverage
+        run: yarn test:unit --ci --coverage
       - name: Running test:e2e
-        run: npx lerna run test:e2e -- --headless
+        run: yarn test:e2e --headless
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v1.1.1
         with:

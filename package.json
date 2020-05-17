@@ -22,6 +22,11 @@
     "url": "https://github.com/i62navpm/firebaseWorkPart/issues"
   },
   "homepage": "https://github.com/i62navpm/firebaseWorkPart#readme",
+  "scripts": {
+    "build": "lerna run build",
+    "test:unit": "jest",
+    "test:e2e": "lerna run test:e2e --"
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional",
