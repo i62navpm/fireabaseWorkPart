@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Running test:unit
-        run: npx lerna run unit:test -- --ci
+        run: npx lerna run unit:test -- --ci --coverage
       - name: Running test:e2e
         run: npx lerna run test:e2e -- --headless
       - name: Coveralls GitHub Action
