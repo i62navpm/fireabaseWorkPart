@@ -49,8 +49,6 @@ export default {
     HelloWorld,
   },
 
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
 }
 </script>
