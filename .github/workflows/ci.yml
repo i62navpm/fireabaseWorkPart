@@ -43,3 +43,7 @@ jobs:
         run: npx lerna run unit:test -- --ci
       - name: Running test:e2e
         run: npx lerna run test:e2e -- --headless
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
