@@ -68,3 +68,6 @@ dist/
 
 # junit output reporter
 junit.xml
+
+# lighthouseci output reporter
+.lighthouseci
