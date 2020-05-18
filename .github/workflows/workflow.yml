@@ -114,14 +114,14 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Install lighthouse
+        run: npm i -g @lhci/cli@0.3.x
       - name: Install dependencies
-        run: |
-          yarn --frozen-lockfile 
-          yarn global add @lhci/cli@0.3.x
+        run: yarn --frozen-lockfile
       - name: Build project
         run: yarn build
       - name: run Lighthouse CI
-        run: npx lhci autorun
+        run: lhci autorun
 
   createRelease:
     if: ${{ github.event_name == 'push' }}
