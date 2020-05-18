@@ -121,7 +121,7 @@ jobs:
       - name: Build project
         run: yarn build
       - name: run Lighthouse CI
-        run: lhci autorun
+        run: npx lhci autorun
 
   createRelease:
     if: ${{ github.event_name == 'push' }}
