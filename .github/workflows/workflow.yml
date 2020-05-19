@@ -147,6 +147,6 @@ jobs:
       - name: Create release
         run: npx lerna version -y --no-push
       - name: Git push
-        run: git push --force
+        run: git push origin master --force
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
