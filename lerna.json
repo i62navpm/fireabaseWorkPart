@@ -11,7 +11,7 @@
       "allowBranch": ["master"],
       "conventionalCommits": true,
       "createRelease": "github",
-      "message": "chore(release): publish %s\n\n\nskip-checks: true"
+      "message": "chore(release): publish %s"
     }
   }
 }
