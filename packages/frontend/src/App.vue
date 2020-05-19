@@ -26,6 +26,7 @@
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
+        rel="noopener"
         text
       >
         <span class="mr-2">Latest Release</span>
