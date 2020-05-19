@@ -8,12 +8,10 @@
       "license": "MIT"
     },
     "version": {
-      "allowBranch": [
-        "master"
-      ],
+      "allowBranch": ["master"],
       "conventionalCommits": true,
       "createRelease": "github",
-      "message": "chore(release): publish %s"
+      "message": "chore(release): publish %s\n\n\nskip-checks: true"
     }
   }
 }
