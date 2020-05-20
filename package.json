@@ -41,7 +41,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "ls-lint && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -55,6 +55,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@commitlint/config-lerna-scopes": "^8.3.4",
+    "@ls-lint/ls-lint": "^1.8.1",
     "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
