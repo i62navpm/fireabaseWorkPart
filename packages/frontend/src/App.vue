@@ -3,7 +3,9 @@
     <TheToolbar />
 
     <v-content>
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </v-content>
   </v-app>
 </template>
@@ -16,3 +18,14 @@ export default {
   components: { TheToolbar },
 }
 </script>
+
+<style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

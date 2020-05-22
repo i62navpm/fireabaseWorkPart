@@ -46,7 +46,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --fix",
+    "/packages/frontend/*.{js,vue}": "yarn lint",
     "*.{json,md}": "prettier --write"
   },
   "devDependencies": {
