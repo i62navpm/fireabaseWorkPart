@@ -12,16 +12,21 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    beforeEnter(to, from, next) {
+      auth.onAuthStateChanged((user) =>
+        user ? next({ name: 'Workforces' }) : next()
+      )
+    },
   },
   {
-    path: '/a',
-    name: 'A',
+    path: '/workforces',
+    name: 'Workforces',
     component: A,
     meta: { requiresAuth: true },
   },
   {
-    path: '/b',
-    name: 'B',
+    path: '/workers',
+    name: 'Workers',
     component: B,
     meta: { requiresAuth: true },
   },

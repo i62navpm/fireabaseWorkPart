@@ -23,14 +23,7 @@ export default {
     this.startLoading()
     auth.onAuthStateChanged((user) => {
       this.$store.commit('setUser', user)
-
-      !user
-        ? this.stopLoading()
-        : this.$router.replace(
-            { name: 'A' },
-            this.stopLoading,
-            this.stopLoading
-          )
+      this.stopLoading()
     })
   },
 }
