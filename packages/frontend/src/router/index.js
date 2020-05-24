@@ -11,21 +11,26 @@ const routes = [
     component: () => import('@/views/Home.vue'),
     beforeEnter(to, from, next) {
       auth.onAuthStateChanged((user) =>
-        user ? next({ name: 'Workforces' }) : next()
+        user ? next({ name: 'workforces' }) : next()
       )
     },
   },
   {
     path: '/workforces',
-    name: 'Workforces',
     component: () => import('@/views/Workforce.vue'),
     meta: { requiresAuth: true },
-  },
-  {
-    path: '/workers',
-    name: 'Workers',
-    component: () => import('@/views/Worker.vue'),
-    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Worker.vue'),
+        name: 'workforces',
+      },
+      {
+        path: ':id',
+        component: () => import('@/views/Home.vue'),
+        name: 'workers',
+      },
+    ],
   },
 ]
 

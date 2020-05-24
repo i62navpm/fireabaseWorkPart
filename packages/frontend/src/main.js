@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import './plugins/firebase'
 import './registerServiceWorker'
+import './filters'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
