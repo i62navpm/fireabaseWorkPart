@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { auth } from '@/plugins/firebase/auth'
-import Home from '@/views/Home.vue'
-import A from '@/views/A.vue'
-import B from '@/views/B.vue'
 
 Vue.use(VueRouter)
 
@@ -11,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
     beforeEnter(to, from, next) {
       auth.onAuthStateChanged((user) =>
         user ? next({ name: 'Workforces' }) : next()
@@ -21,13 +18,13 @@ const routes = [
   {
     path: '/workforces',
     name: 'Workforces',
-    component: A,
+    component: () => import('@/views/Workforce.vue'),
     meta: { requiresAuth: true },
   },
   {
     path: '/workers',
     name: 'Workers',
-    component: B,
+    component: () => import('@/views/Worker.vue'),
     meta: { requiresAuth: true },
   },
 ]

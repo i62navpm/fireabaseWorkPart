@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <p>A</p>
-    <v-btn to="/b">To b</v-btn>
+    <p>B</p>
+    <v-btn :to="{ name: 'Workforces' }">To a</v-btn>
   </div>
 </template>
 
