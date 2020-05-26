@@ -28,7 +28,29 @@ const routes = [
       {
         path: ':id',
         component: () => import('@/views/Worker.vue'),
-        name: 'worker',
+        children: [
+          {
+            path: '',
+            component: () => import('@/components/TheWorker.vue'),
+            name: 'worker',
+          },
+          {
+            path: ':year/:month',
+            component: () => import('@/views/Calendar.vue'),
+            children: [
+              {
+                path: '',
+                component: () => import('@/components/TheWorkerCalendar.vue'),
+                name: 'calendar',
+              },
+              {
+                path: 'summary',
+                component: () => import('@/components/TheWorkerSummary.vue'),
+                name: 'summary',
+              },
+            ],
+          },
+        ],
       },
     ],
   },

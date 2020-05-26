@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    Hola {{ $route.path }}
+    Calendar {{ $route.path }}
     <v-row>
       <v-fade-transition mode="out-in">
         <router-view />
