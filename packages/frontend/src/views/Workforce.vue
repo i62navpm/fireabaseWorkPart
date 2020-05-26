@@ -4,6 +4,9 @@
       <the-breadcrumbs />
     </v-row>
     <v-row>
+      <the-workforce-carousel />
+    </v-row>
+    <v-row>
       <v-fade-transition mode="out-in">
         <router-view />
       </v-fade-transition>
@@ -13,10 +16,12 @@
 
 <script>
 import TheBreadcrumbs from '@/components/TheBreadcrumbs'
+import TheWorkforceCarousel from '@/components/TheWorkforceCarousel'
 
 export default {
   components: {
     TheBreadcrumbs,
+    TheWorkforceCarousel,
   },
 }
 </script>

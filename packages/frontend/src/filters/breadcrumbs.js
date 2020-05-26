@@ -1,11 +1,11 @@
 export default function (value) {
   const breadcrumbs = {
-    workforces: { text: 'Workforces', href: 'workforces' },
-    workers: { text: 'Workers', href: 'workers' },
+    workforce: { text: 'Workforce', href: 'workforce' },
+    worker: { text: 'Worker', href: 'worker' },
   }
   const routerMap = {
-    workforces: [breadcrumbs.workforces],
-    workers: [breadcrumbs.workforces, breadcrumbs.workers],
+    workforce: [breadcrumbs.workforce],
+    worker: [breadcrumbs.workforce, breadcrumbs.worker],
   }
   return routerMap[value] || []
 }

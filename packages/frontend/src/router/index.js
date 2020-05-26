@@ -11,7 +11,7 @@ const routes = [
     component: () => import('@/views/Home.vue'),
     beforeEnter(to, from, next) {
       auth.onAuthStateChanged((user) =>
-        user ? next({ name: 'workforces' }) : next()
+        user ? next({ name: 'workforce' }) : next()
       )
     },
   },
@@ -22,13 +22,13 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('@/views/Worker.vue'),
-        name: 'workforces',
+        component: () => import('@/components/TheWorkforce.vue'),
+        name: 'workforce',
       },
       {
         path: ':id',
-        component: () => import('@/views/Home.vue'),
-        name: 'workers',
+        component: () => import('@/views/Worker.vue'),
+        name: 'worker',
       },
     ],
   },
