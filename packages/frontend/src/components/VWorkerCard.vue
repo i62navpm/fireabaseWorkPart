@@ -2,7 +2,7 @@
   <v-hover v-slot:default="{ hover }">
     <v-card
       :elevation="hover ? 3 : active ? 5 : 0"
-      :to="{ name: 'worker', params: { id: worker.id } }"
+      :to="workerRoute"
       width="300"
       height="116"
       outlined
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
   props: {
     worker: {
@@ -54,6 +56,24 @@ export default {
   computed: {
     avatarUrl() {
       return `https://avatars.dicebear.com/api/male/${this.worker.id}.svg`
+    },
+    workerRouteParams() {
+      const { id } = this.worker
+      const {
+        year = dayjs().format('YYYY'),
+        month = dayjs().format('MM'),
+      } = this.$route.params
+
+      return { id, year, month }
+    },
+    workerRouteName() {
+      return this.$route.name === 'workforce' ? 'worker' : this.$route.name
+    },
+    workerRoute() {
+      return {
+        name: this.workerRouteName,
+        params: this.workerRouteParams,
+      }
     },
   },
 }
