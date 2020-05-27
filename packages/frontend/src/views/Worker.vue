@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    Hola {{ $route.path }}
+    <v-row>
+      <the-worker-title />
+    </v-row>
     <v-row>
       <v-fade-transition mode="out-in">
         <router-view />
@@ -10,5 +12,11 @@
 </template>
 
 <script>
-export default {}
+import TheWorkerTitle from '@/components/TheWorkerTitle'
+
+export default {
+  components: {
+    TheWorkerTitle,
+  },
+}
 </script>

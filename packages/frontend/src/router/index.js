@@ -18,25 +18,17 @@ const routes = [
   {
     path: '/workforces',
     component: () => import('@/views/Workforce.vue'),
+    name: 'workforce',
     meta: { requiresAuth: true },
     children: [
       {
-        path: '',
-        component: () => import('@/components/TheWorkforce.vue'),
-        name: 'workforce',
-      },
-      {
         path: ':id',
         component: () => import('@/views/Worker.vue'),
+        name: 'worker',
         children: [
           {
-            path: '',
-            component: () => import('@/components/TheWorker.vue'),
-            name: 'worker',
-          },
-          {
             path: ':year/:month',
-            component: () => import('@/views/Calendar.vue'),
+            component: () => import('@/views/Information.vue'),
             children: [
               {
                 path: '',

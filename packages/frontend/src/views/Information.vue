@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    Calendar {{ $route.path }}
+    <v-row> Calendar {{ $route.path }} </v-row>
     <v-row>
       <v-fade-transition mode="out-in">
         <router-view />
