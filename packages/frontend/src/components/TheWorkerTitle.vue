@@ -24,10 +24,7 @@
 </template>
 
 <script>
-import loadingMixin from '@/mixins/loading.js'
-
 export default {
-  mixins: [loadingMixin],
   data: () => ({
     worker: {
       id: '1',
