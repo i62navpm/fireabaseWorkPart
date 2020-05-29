@@ -14,15 +14,19 @@
         </v-worker-card>
       </v-fade-transition>
     </v-slide-item>
+    <v-slide-item>
+      <v-worker-card-add class="ma-4" />
+    </v-slide-item>
   </v-slide-group>
 </template>
 
 <script>
 import VWorkerCard from '@/components/VWorkerCard'
+import VWorkerCardAdd from '@/components/VWorkerCardAdd'
 import loadingMixin from '@/mixins/loading.js'
 
 export default {
-  components: { VWorkerCard },
+  components: { VWorkerCard, VWorkerCardAdd },
   mixins: [loadingMixin],
   data: () => ({
     workforce: [
