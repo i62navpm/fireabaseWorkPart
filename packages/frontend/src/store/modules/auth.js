@@ -1,3 +1,5 @@
+import { db } from '@/plugins/firebase/db'
+
 export default {
   state: {
     user: null,
@@ -7,6 +9,7 @@ export default {
   },
   actions: {
     setUser: ({ commit }, user) => commit('setUser', user),
+    createUser: (_, email) => db.collection('users').doc(email).set({}),
   },
   getters: {
     getUser: (state) => state.user,

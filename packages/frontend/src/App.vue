@@ -19,12 +19,28 @@ export default {
   name: 'App',
   components: { TheToolbar },
   mixins: [loadingMixin],
-  created() {
+  async created() {
     this.startLoading()
-    auth.onAuthStateChanged((user) => {
-      this.$store.commit('setUser', user)
+    try {
+      await this.getRedirectResult()
+      this.detectUserChanged()
+    } finally {
       this.stopLoading()
-    })
+    }
+  },
+  methods: {
+    detectUserChanged() {
+      auth.onAuthStateChanged((user) => this.$store.commit('setUser', user))
+    },
+    async getRedirectResult() {
+      const { additionalUserInfo } = await auth.getRedirectResult()
+      if (additionalUserInfo?.isNewUser) {
+        await this.$store.dispatch(
+          'createUser',
+          additionalUserInfo.profile.email
+        )
+      }
+    },
   },
 }
 </script>
