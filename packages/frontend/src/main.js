@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './plugins/firebase'
+import './plugins/maps'
 import './registerServiceWorker'
 import './filters'
 import router from './router'
