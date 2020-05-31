@@ -29,5 +29,7 @@ export default {
   },
   getters: {
     getWorkforce: (state) => state.workers,
+    getWorkerRef: (state) => (workerId) =>
+      state.workers.find(({ id }) => id === workerId),
   },
 }

@@ -39,25 +39,7 @@ export default {
   },
   computed: {
     worker() {
-      return this.$store.getters.getWorker
-    },
-  },
-
-  beforeRouteUpdate(to, from, next) {
-    this.updateWorkerRef(to.params.id)
-    next()
-  },
-  mounted() {
-    this.updateWorkerRef(this.id)
-  },
-  methods: {
-    updateWorkerRef(id) {
-      this.startLoading()
-      try {
-        this.$store.dispatch('workerRef', id)
-      } finally {
-        this.stopLoading()
-      }
+      return this.$store.getters.getWorkerRef(this.id)
     },
   },
 }

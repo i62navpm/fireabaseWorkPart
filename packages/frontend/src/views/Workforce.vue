@@ -42,10 +42,10 @@ export default {
       return this.$store.getters.getWorkforce
     },
   },
-  created() {
+  async created() {
     this.startLoading()
     try {
-      this.$store.dispatch('workforceRef')
+      await this.$store.dispatch('workforceRef')
     } finally {
       this.stopLoading()
     }
