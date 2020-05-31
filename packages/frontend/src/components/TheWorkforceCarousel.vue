@@ -5,17 +5,16 @@
         <v-worker-card
           class="ma-4"
           :worker="worker"
-          :loading="loading"
           :active="activeWorkerId === worker.id"
-        >
-          <template v-slot:loading>
-            <v-skeleton-loader type="list-item-avatar-three-line" />
-          </template>
-        </v-worker-card>
+        />
       </v-fade-transition>
     </v-slide-item>
     <v-slide-item>
-      <v-worker-card-add class="ma-4" />
+      <v-worker-card-add :loading="loading" class="ma-4">
+        <template v-slot:loading>
+          <v-skeleton-loader type="list-item-avatar-three-line" />
+        </template>
+      </v-worker-card-add>
     </v-slide-item>
   </v-slide-group>
 </template>
@@ -23,15 +22,22 @@
 <script>
 import VWorkerCard from '@/components/VWorkerCard'
 import VWorkerCardAdd from '@/components/VWorkerCardAdd'
-import loadingMixin from '@/mixins/loading.js'
 
 export default {
   components: { VWorkerCard, VWorkerCardAdd },
-  mixins: [loadingMixin],
-  computed: {
-    workforce() {
-      return this.$store.getters.getWorkforce
+  props: {
+    workforce: {
+      type: Array,
+      required: true,
+      default: () => [],
     },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  computed: {
     activeWorkerId() {
       return this.$route.params?.id
     },

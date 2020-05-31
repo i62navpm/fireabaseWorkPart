@@ -3,24 +3,32 @@ import { db } from '@/plugins/firebase/db'
 
 export default {
   state: {
-    workforce: [],
+    workers: [],
   },
   mutations: {
-    setWorkforce: (state, workforce) => (state.workforce = workforce),
+    setWorkforce: (state, workers) => (state.workers = workers),
     ...vuexfireMutations,
   },
   actions: {
     workforceRef: firestoreAction(({ bindFirestoreRef, rootGetters }) =>
       bindFirestoreRef(
-        'workforce',
+        'workers',
         db
           .collection('users')
           .doc(rootGetters.getUser.email)
-          .collection('workforces')
+          .collection('workforce')
+          .orderBy('createdAt')
       )
+    ),
+    createWorker: firestoreAction(({ rootGetters }, worker) =>
+      db
+        .collection('users')
+        .doc(rootGetters.getUser.email)
+        .collection('workforce')
+        .add(worker)
     ),
   },
   getters: {
-    getWorkforce: (state) => state.workforce,
+    getWorkforce: (state) => state.workers,
   },
 }
