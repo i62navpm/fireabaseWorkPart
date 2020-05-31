@@ -2,18 +2,14 @@
   <v-hover v-slot:default="{ hover }">
     <v-card
       :elevation="hover ? 3 : active ? 5 : 0"
-      :to="workerRoute"
+      :to="{ name: 'worker', params: { id: worker.id } }"
       width="300"
       height="116"
       outlined
     >
       <v-fade-transition mode="out-in">
         <v-row class="fill-height" align="center" justify="center">
-          <v-col v-if="loading">
-            <slot name="loading" />
-          </v-col>
-
-          <v-col v-else>
+          <v-col>
             <v-list-item three-line>
               <v-list-item-avatar>
                 <v-img :src="avatarUrl" :alt="worker.name"></v-img>
@@ -35,18 +31,12 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
-
 export default {
   props: {
     worker: {
       type: Object,
       required: true,
       default: () => ({}),
-    },
-    loading: {
-      type: Boolean,
-      default: false,
     },
     active: {
       type: Boolean,
@@ -56,24 +46,6 @@ export default {
   computed: {
     avatarUrl() {
       return `https://avatars.dicebear.com/api/male/${this.worker.id}.svg`
-    },
-    workerRouteParams() {
-      const { id } = this.worker
-      const {
-        year = dayjs().format('YYYY'),
-        month = dayjs().format('MM'),
-      } = this.$route.params
-
-      return { id, year, month }
-    },
-    workerRouteName() {
-      return this.$route.name === 'workforce' ? 'worker' : this.$route.name
-    },
-    workerRoute() {
-      return {
-        name: this.workerRouteName,
-        params: this.workerRouteParams,
-      }
     },
   },
 }

@@ -1,20 +1,14 @@
 <template>
   <v-slide-group :value="activeWorker" mandatory center-active show-arrows>
     <v-slide-item v-for="worker in workforce" :key="worker.id">
-      <v-fade-transition mode="out-in">
-        <v-worker-card
-          class="ma-4"
-          :worker="worker"
-          :active="activeWorkerId === worker.id"
-        />
-      </v-fade-transition>
+      <v-worker-card
+        class="ma-4"
+        :worker="worker"
+        :active="activeWorkerId === worker.id"
+      />
     </v-slide-item>
     <v-slide-item>
-      <v-worker-card-add :loading="loading" class="ma-4">
-        <template v-slot:loading>
-          <v-skeleton-loader type="list-item-avatar-three-line" />
-        </template>
-      </v-worker-card-add>
+      <v-worker-card-add class="ma-4" />
     </v-slide-item>
   </v-slide-group>
 </template>
@@ -30,11 +24,6 @@ export default {
       type: Array,
       required: true,
       default: () => [],
-    },
-    loading: {
-      type: Boolean,
-      required: false,
-      default: false,
     },
   },
   computed: {

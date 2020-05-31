@@ -10,12 +10,7 @@
         @click="openWorkerForm"
       >
         <v-row class="fill-height" align="center" justify="center">
-          <v-fade-transition mode="out-in">
-            <v-col v-if="loading">
-              <slot name="loading" />
-            </v-col>
-            <v-icon v-else size="48" v-text="'mdi-account-plus'" />
-          </v-fade-transition>
+          <v-icon size="48" v-text="'mdi-account-plus'" />
         </v-row>
       </v-card>
     </v-hover>

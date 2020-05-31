@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export default [
   {
     path: '/workforces',
@@ -9,7 +11,14 @@ export default [
         path: ':id/:year/:month',
         component: () => import('@/views/Worker.vue'),
         name: 'worker',
-        redirect: { name: 'calendar' },
+        redirect: (to) => {
+          const {
+            id,
+            year = dayjs().format('YYYY'),
+            month = dayjs().format('MM'),
+          } = to.params
+          return { name: 'calendar', params: { id, year, month } }
+        },
         children: [
           {
             path: '',

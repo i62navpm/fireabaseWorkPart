@@ -4,11 +4,15 @@
       <the-breadcrumbs />
     </v-row>
     <v-row>
-      <the-workforce-carousel
-        :key="workforce.length"
-        :workforce="workforce"
-        :loading="loading"
-      />
+      <v-load-data :loading="loading">
+        <template #loading>
+          <the-workforce-carousel-empty />
+        </template>
+        <the-workforce-carousel
+          :key="workforce.length"
+          :workforce="workforce"
+        />
+      </v-load-data>
     </v-row>
     <v-row>
       <v-fade-transition mode="out-in">
@@ -20,13 +24,17 @@
 
 <script>
 import TheBreadcrumbs from '@/components/TheBreadcrumbs'
+import VLoadData from '@/components/VLoadData'
 import TheWorkforceCarousel from '@/components/TheWorkforceCarousel'
+import TheWorkforceCarouselEmpty from '@/components/TheWorkforceCarouselEmpty'
 import loadingMixin from '@/mixins/loading.js'
 
 export default {
   components: {
     TheBreadcrumbs,
     TheWorkforceCarousel,
+    TheWorkforceCarouselEmpty,
+    VLoadData,
   },
   mixins: [loadingMixin],
   computed: {
