@@ -11,6 +11,7 @@ export default [
         path: ':id/:year/:month',
         component: () => import('@/views/Worker.vue'),
         name: 'worker',
+        props: true,
         redirect: (to) => {
           const {
             id,

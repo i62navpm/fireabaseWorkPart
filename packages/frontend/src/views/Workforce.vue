@@ -6,7 +6,7 @@
     <v-row>
       <v-load-data :loading="loading">
         <template #loading>
-          <the-workforce-carousel-empty />
+          <the-workforce-carousel-skeleton />
         </template>
         <the-workforce-carousel
           :key="workforce.length"
@@ -26,14 +26,14 @@
 import TheBreadcrumbs from '@/components/TheBreadcrumbs'
 import VLoadData from '@/components/VLoadData'
 import TheWorkforceCarousel from '@/components/TheWorkforceCarousel'
-import TheWorkforceCarouselEmpty from '@/components/TheWorkforceCarouselEmpty'
+import TheWorkforceCarouselSkeleton from '@/components/TheWorkforceCarouselSkeleton'
 import loadingMixin from '@/mixins/loading.js'
 
 export default {
   components: {
     TheBreadcrumbs,
     TheWorkforceCarousel,
-    TheWorkforceCarouselEmpty,
+    TheWorkforceCarouselSkeleton,
     VLoadData,
   },
   mixins: [loadingMixin],

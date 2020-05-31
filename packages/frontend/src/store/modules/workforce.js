@@ -1,4 +1,4 @@
-import { vuexfireMutations, firestoreAction } from 'vuexfire'
+import { firestoreAction } from 'vuexfire'
 import { db } from '@/plugins/firebase/db'
 
 export default {
@@ -7,7 +7,6 @@ export default {
   },
   mutations: {
     setWorkforce: (state, workers) => (state.workers = workers),
-    ...vuexfireMutations,
   },
   actions: {
     workforceRef: firestoreAction(({ bindFirestoreRef, rootGetters }) =>
