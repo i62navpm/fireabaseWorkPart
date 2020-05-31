@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-worker-card-form ref="workerForm" @onSubmit="saveWorker" />
+    <v-worker-dialog-form ref="workerForm" @onSubmit="saveWorker" />
     <v-hover v-slot:default="{ hover }">
       <v-card
         width="300"
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import VWorkerCardForm from '@/components/VWorkerCardForm'
+import VWorkerDialogForm from '@/components/VWorkerDialogForm'
 import dayjs from 'dayjs'
 
 export default {
   components: {
-    VWorkerCardForm,
+    VWorkerDialogForm,
   },
   props: {
     loading: {

@@ -3,6 +3,7 @@
     <v-card
       :elevation="hover ? 3 : active ? 5 : 0"
       :to="{ name: 'worker', params: { id: worker.id } }"
+      :disabled="worker.disabled"
       width="300"
       height="116"
       outlined
@@ -12,7 +13,12 @@
           <v-col>
             <v-list-item three-line>
               <v-list-item-avatar>
-                <v-img :src="avatarUrl" :alt="worker.name"></v-img>
+                <v-fade-transition mode="out-in">
+                  <v-icon v-if="worker.disabled" color="error" size="40">
+                    mdi-cancel
+                  </v-icon>
+                  <v-img v-else :src="avatarUrl" :alt="worker.name"></v-img>
+                </v-fade-transition>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline mb-1">

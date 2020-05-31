@@ -111,13 +111,6 @@ export default {
     VAddressInput,
   },
   mixins: [loadingMixin],
-  props: {
-    workerData: {
-      type: Object,
-      required: false,
-      default: () => ({}),
-    },
-  },
   data: () => ({
     open: false,
     valid: false,
@@ -126,11 +119,10 @@ export default {
       required: (value) => !!value || 'Este campo es obligatorio.',
     },
   }),
-  mounted() {
-    this.worker = this.workerData.name ? { ...this.workerData } : this.worker
-  },
   methods: {
-    openDialog() {
+    openDialog(worker) {
+      if (worker) this.worker = { ...worker }
+
       this.open = true
     },
     closeDialog() {

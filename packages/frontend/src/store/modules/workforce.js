@@ -26,6 +26,13 @@ export default {
         .collection('workforce')
         .add(worker)
     ),
+    updateWorker: firestoreAction(({ rootGetters }, { id, data }) => {
+      db.collection('users')
+        .doc(rootGetters.getUser.email)
+        .collection('workforce')
+        .doc(id)
+        .update(data)
+    }),
   },
   getters: {
     getWorkforce: (state) => state.workers,
