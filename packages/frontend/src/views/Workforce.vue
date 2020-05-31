@@ -1,24 +1,17 @@
 <template>
   <v-container>
-    <v-row>
-      <the-breadcrumbs />
-    </v-row>
-    <v-row>
-      <v-load-data :loading="loading">
-        <template #loading>
-          <the-workforce-carousel-skeleton />
-        </template>
-        <the-workforce-carousel
-          :key="workforce.length"
-          :workforce="workforce"
-        />
-      </v-load-data>
-    </v-row>
-    <v-row>
-      <v-fade-transition mode="out-in">
-        <router-view />
-      </v-fade-transition>
-    </v-row>
+    <the-breadcrumbs />
+
+    <v-load-data :loading="loading">
+      <template #loading>
+        <the-workforce-carousel-skeleton />
+      </template>
+      <the-workforce-carousel :key="workforce.length" :workforce="workforce" />
+    </v-load-data>
+
+    <v-fade-transition mode="out-in">
+      <router-view />
+    </v-fade-transition>
   </v-container>
 </template>
 

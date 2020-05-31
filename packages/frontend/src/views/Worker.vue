@@ -1,19 +1,15 @@
 <template>
   <v-container>
-    <v-row>
-      <v-load-data :loading="loading || !worker">
-        <template #loading>
-          <the-worker-title-skeleton />
-        </template>
-        <the-worker-title :worker="worker" />
-      </v-load-data>
-    </v-row>
+    <v-load-data :loading="loading || !worker">
+      <template #loading>
+        <the-worker-title-skeleton />
+      </template>
+      <the-worker-title :worker="worker" />
+    </v-load-data>
 
-    <v-row>
-      <v-fade-transition mode="out-in">
-        <router-view />
-      </v-fade-transition>
-    </v-row>
+    <v-fade-transition mode="out-in">
+      <router-view />
+    </v-fade-transition>
   </v-container>
 </template>
 
