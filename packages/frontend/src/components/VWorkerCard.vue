@@ -1,43 +1,21 @@
 <template>
   <v-hover v-slot:default="{ hover }">
-    <v-card
-      :elevation="hover ? 3 : active ? 5 : 0"
-      :to="{ name: 'worker', params: { id: worker.id } }"
-      :disabled="worker.disabled"
-      width="300"
-      height="116"
-      outlined
-    >
-      <v-fade-transition mode="out-in">
-        <v-row class="fill-height" align="center" justify="center">
-          <v-col>
-            <v-list-item three-line>
-              <v-list-item-avatar>
-                <v-fade-transition mode="out-in">
-                  <v-icon v-if="worker.disabled" color="error" size="40">
-                    mdi-cancel
-                  </v-icon>
-                  <v-img v-else :src="avatarUrl" :alt="worker.name"></v-img>
-                </v-fade-transition>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="headline mb-1">
-                  {{ worker.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ worker.description }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-        </v-row>
-      </v-fade-transition>
+    <v-card width="300" elevation="0">
+      <v-worker-card-overlay v-bind="{ hover, worker }" />
+      <v-worker-card-detail v-bind="{ hover, active, worker }" />
     </v-card>
   </v-hover>
 </template>
 
 <script>
+import VWorkerCardOverlay from '@/components/VWorkerCardOverlay'
+import VWorkerCardDetail from '@/components/VWorkerCardDetail'
+
 export default {
+  components: {
+    VWorkerCardOverlay,
+    VWorkerCardDetail,
+  },
   props: {
     worker: {
       type: Object,
@@ -47,11 +25,6 @@ export default {
     active: {
       type: Boolean,
       default: false,
-    },
-  },
-  computed: {
-    avatarUrl() {
-      return `https://avatars.dicebear.com/api/male/${this.worker.id}.svg`
     },
   },
 }

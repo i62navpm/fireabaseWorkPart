@@ -4,13 +4,13 @@
     <v-hover v-slot:default="{ hover }">
       <v-card
         width="300"
-        height="116"
+        class="fill-height"
         :elevation="hover ? 3 : 0"
         outlined
         @click="openWorkerForm"
       >
         <v-row class="fill-height" align="center" justify="center">
-          <v-icon size="48" v-text="'mdi-account-plus'" />
+          <v-icon x-large>mdi-account-plus</v-icon>
         </v-row>
       </v-card>
     </v-hover>

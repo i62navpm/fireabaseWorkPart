@@ -65,18 +65,18 @@ export default {
       this.startLoading()
       try {
         const { id } = this.worker
-        const disabled = !this.worker.disabled
+        const disabled = true
 
         await this.$store.dispatch('updateWorker', {
           id,
           data: { disabled },
         })
 
-        // if (disabled) {
-        //   this.$router.push({
-        //     name: 'workforce',
-        //   })
-        // }
+        if (disabled) {
+          this.$router.push({
+            name: 'workforce',
+          })
+        }
       } finally {
         this.stopLoading()
       }
