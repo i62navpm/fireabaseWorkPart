@@ -21,6 +21,7 @@ import VLoadData from '@/components/VLoadData'
 import TheWorkforceCarousel from '@/components/TheWorkforceCarousel'
 import TheWorkforceCarouselSkeleton from '@/components/TheWorkforceCarouselSkeleton'
 import loadingMixin from '@/mixins/loading.js'
+import notificationMixin from '@/mixins/notification'
 
 export default {
   components: {
@@ -29,7 +30,7 @@ export default {
     TheWorkforceCarouselSkeleton,
     VLoadData,
   },
-  mixins: [loadingMixin],
+  mixins: [loadingMixin, notificationMixin],
   computed: {
     workforce() {
       return this.$store.getters.getWorkforce
@@ -39,6 +40,8 @@ export default {
     this.startLoading()
     try {
       await this.$store.dispatch('workforceRef')
+    } catch {
+      this.notifyError('Error al obtener la plantilla')
     } finally {
       this.stopLoading()
     }

@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <TheToolbar />
+    <TheNotification />
 
     <v-content>
       <v-fade-transition mode="out-in">
@@ -12,13 +13,15 @@
 
 <script>
 import TheToolbar from '@/components/TheToolbar'
+import TheNotification from '@/components/TheNotification'
 import { auth } from '@/plugins/firebase/auth'
 import loadingMixin from '@/mixins/loading.js'
+import notificationMixin from '@/mixins/notification'
 
 export default {
   name: 'App',
-  components: { TheToolbar },
-  mixins: [loadingMixin],
+  components: { TheToolbar, TheNotification },
+  mixins: [loadingMixin, notificationMixin],
   async created() {
     this.startLoading()
     try {
@@ -35,10 +38,14 @@ export default {
     async getRedirectResult() {
       const { additionalUserInfo } = await auth.getRedirectResult()
       if (additionalUserInfo?.isNewUser) {
-        await this.$store.dispatch(
-          'createUser',
-          additionalUserInfo.profile.email
-        )
+        try {
+          await this.$store.dispatch(
+            'createUser',
+            additionalUserInfo.profile.email
+          )
+        } catch {
+          this.notifyError('Error al crear el usuario')
+        }
       }
     },
   },

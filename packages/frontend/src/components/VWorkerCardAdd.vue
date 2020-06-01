@@ -18,13 +18,15 @@
 </template>
 
 <script>
-import VWorkerDialogForm from '@/components/VWorkerDialogForm'
 import dayjs from 'dayjs'
+import VWorkerDialogForm from '@/components/VWorkerDialogForm'
+import notificationMixin from '@/mixins/notification'
 
 export default {
   components: {
     VWorkerDialogForm,
   },
+  mixins: [notificationMixin],
   props: {
     loading: {
       type: Boolean,
@@ -45,10 +47,13 @@ export default {
           ...data,
         })
 
+        this.notifySuccess('Trabajador guardado')
         this.$router.push({
           name: 'worker',
           params: { id },
         })
+      } catch {
+        this.notifyError('Error al guardar')
       } finally {
         cb()
       }

@@ -25,12 +25,13 @@
 <script>
 import VWorkerDialogForm from '@/components/VWorkerDialogForm'
 import loadingMixin from '@/mixins/loading'
+import notificationMixin from '@/mixins/notification'
 
 export default {
   components: {
     VWorkerDialogForm,
   },
-  mixins: [loadingMixin],
+  mixins: [loadingMixin, notificationMixin],
   props: {
     worker: {
       type: Object,
@@ -56,6 +57,9 @@ export default {
         const { id } = this.worker
 
         await this.$store.dispatch('updateWorker', { id, data })
+        this.notifySuccess('Trabajador actualizado')
+      } catch {
+        this.notifyError('Error al actualizar')
       } finally {
         cb()
         this.closeWorkerForm()
@@ -72,11 +76,12 @@ export default {
           data: { disabled },
         })
 
-        if (disabled) {
-          this.$router.push({
-            name: 'workforce',
-          })
-        }
+        this.notifyWarning('Trabajador bloqueado')
+        this.$router.push({
+          name: 'workforce',
+        })
+      } catch {
+        this.notifyError('Error al bloquear')
       } finally {
         this.stopLoading()
       }

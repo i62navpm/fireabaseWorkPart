@@ -22,9 +22,10 @@
 
 <script>
 import loadingMixin from '@/mixins/loading'
+import notificationMixin from '@/mixins/notification'
 
 export default {
-  mixins: [loadingMixin],
+  mixins: [loadingMixin, notificationMixin],
   props: {
     worker: {
       type: Object,
@@ -49,10 +50,13 @@ export default {
           data: { disabled },
         })
 
+        this.notifySuccess('Trabajador desbloqueado')
         this.$router.push({
           name: 'worker',
           params: { id },
         })
+      } catch {
+        this.notifyError('Error al desbloquear')
       } finally {
         this.stopLoading()
       }
