@@ -26,7 +26,7 @@ export default {
     date: {
       set(date) {
         const [year, month] = date.split('-')
-        this.$router.push({ params: { year, month } })
+        this.$router.push({ params: { year, month } }).catch(() => {})
       },
       get() {
         return `${this.year}-${this.month}`

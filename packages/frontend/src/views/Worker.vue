@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-load-data :loading="loading || !worker">
+    <v-load-data :loading="!worker">
       <template #loading>
         <the-worker-title-skeleton />
       </template>
@@ -36,6 +36,7 @@ import VCardChartSkeleton from '@/components/VCardChartSkeleton'
 import VDatePicker from '@/components/VDatePicker'
 import VLoadData from '@/components/VLoadData'
 import loadingMixin from '@/mixins/loading.js'
+import notificationMixin from '@/mixins/notification'
 
 export default {
   components: {
@@ -46,7 +47,7 @@ export default {
     VCardChartSkeleton,
     VLoadData,
   },
-  mixins: [loadingMixin],
+  mixins: [loadingMixin, notificationMixin],
   props: {
     id: {
       type: String,
@@ -67,6 +68,22 @@ export default {
   computed: {
     worker() {
       return this.$store.getters.getWorkerRef(this.id)
+    },
+  },
+  watch: {
+    '$route.params': {
+      immediate: true,
+      async handler(params) {
+        this.startLoading()
+        try {
+          await this.$store.dispatch('incomeRef', params)
+          await this.$store.dispatch('outcomeRef', params)
+        } catch {
+          this.notifyError('Error al obtener la plantilla')
+        } finally {
+          this.stopLoading()
+        }
+      },
     },
   },
 }
