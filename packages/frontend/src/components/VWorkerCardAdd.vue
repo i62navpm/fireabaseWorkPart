@@ -3,7 +3,7 @@
     <v-worker-dialog-form ref="workerForm" @onSubmit="saveWorker" />
     <v-hover v-slot:default="{ hover }">
       <v-card
-        width="300"
+        width="220"
         height="89"
         class="fill-height"
         :elevation="hover ? 3 : 0"

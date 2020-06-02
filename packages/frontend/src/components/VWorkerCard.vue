@@ -1,6 +1,6 @@
 <template>
   <v-hover v-slot:default="{ hover }">
-    <v-card width="300" elevation="0">
+    <v-card width="220" elevation="0">
       <v-worker-card-overlay v-bind="{ hover, worker }" />
       <v-worker-card-detail v-bind="{ hover, active, worker }" />
     </v-card>
