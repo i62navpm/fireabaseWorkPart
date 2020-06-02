@@ -1,13 +1,21 @@
 <template>
   <v-list>
     <v-worker-dialog-form ref="workerForm" @onSubmit="updateWorker" />
-    <v-list-item>
+    <v-list-item two-line>
       <v-list-item-avatar>
         <v-img :src="avatarUrl" :alt="worker.name"></v-img>
       </v-list-item-avatar>
-      <v-list-item-title class="headline mb-1">
-        {{ worker.name }}
-      </v-list-item-title>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">
+          {{ worker.name }}
+        </v-list-item-title>
+        <v-list-item-subtitle class="d-flex align-center">
+          <v-icon small color="success">mdi-arrow-up-bold</v-icon>
+          <span class="mr-2">{{ worker.fullSalary }}€</span>
+          <v-icon small color="error">mdi-arrow-down-bold</v-icon>
+          <span>{{ worker.halfSalary }}€</span>
+        </v-list-item-subtitle>
+      </v-list-item-content>
       <v-list-item-action>
         <v-btn icon @click="openWorkerForm">
           <v-icon>mdi-account-edit</v-icon>
