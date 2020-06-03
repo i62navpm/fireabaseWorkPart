@@ -3,7 +3,7 @@ import { db } from '@/plugins/firebase/db'
 
 function serializeFn({ year, month }) {
   return (snapshot) => ({
-    date: `${year}-${month}-${snapshot.id}`,
+    date: `${snapshot.id}-${month}-${year}`,
     ...snapshot.data(),
   })
 }
@@ -49,6 +49,6 @@ export default {
     // updateWorker: firestoreAction(({ rootGetters }, { id, data }) => {}),
   },
   getters: {
-    getWorkerSalary: (state) => state,
+    getWorkerMovements: (state) => state,
   },
 }
