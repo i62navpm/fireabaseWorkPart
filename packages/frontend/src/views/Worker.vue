@@ -12,12 +12,7 @@
         <v-date-picker v-bind="{ year, month }" />
       </v-col>
       <v-col order="1" order-sm="2" cols="12" sm="6" md="8">
-        <v-load-data :loading="loading || !worker">
-          <template #loading>
-            <v-card-chart-skeleton />
-          </template>
-          <v-card-chart-line />
-        </v-load-data>
+        <v-card-chart v-bind="{ loading }" />
       </v-col>
     </v-row>
 
@@ -31,8 +26,7 @@
 import dayjs from 'dayjs'
 import TheWorkerTitle from '@/components/TheWorkerTitle'
 import TheWorkerTitleSkeleton from '@/components/TheWorkerTitleSkeleton'
-import VCardChartLine from '@/components/VCardChartLine'
-import VCardChartSkeleton from '@/components/VCardChartSkeleton'
+import VCardChart from '@/components/VCardChart'
 import VDatePicker from '@/components/VDatePicker'
 import VLoadData from '@/components/VLoadData'
 import loadingMixin from '@/mixins/loading.js'
@@ -43,8 +37,7 @@ export default {
     TheWorkerTitle,
     TheWorkerTitleSkeleton,
     VDatePicker,
-    VCardChartLine,
-    VCardChartSkeleton,
+    VCardChart,
     VLoadData,
   },
   mixins: [loadingMixin, notificationMixin],

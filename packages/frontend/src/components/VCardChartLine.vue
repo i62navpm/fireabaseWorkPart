@@ -1,9 +1,5 @@
 <template>
-  <v-card height="377.2" outlined>
-    <v-card-text>
-      <ve-line :data="chartData" :colors="colors" />
-    </v-card-text>
-  </v-card>
+  <ve-line :data="chartData" :colors="colors" />
 </template>
 
 <script>

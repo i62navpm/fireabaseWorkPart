@@ -1,5 +1,5 @@
 <template>
-  <v-list>
+  <v-list height="89">
     <v-worker-dialog-form ref="workerForm" @onSubmit="updateWorker" />
     <v-list-item two-line>
       <v-list-item-avatar>
