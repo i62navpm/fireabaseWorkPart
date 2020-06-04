@@ -1,8 +1,8 @@
 export default function (value) {
   const breadcrumbs = {
-    workforce: { text: 'Workforce', href: 'workforce' },
-    calendar: { text: 'Calendar', href: 'calendar' },
-    summary: { text: 'Summary', href: 'summary' },
+    workforce: { text: 'Plantilla', href: 'workforce' },
+    calendar: { text: 'Calendario', href: 'calendar' },
+    summary: { text: 'Resumen', href: 'summary' },
   }
   const routerMap = {
     workforce: [breadcrumbs.workforce],
