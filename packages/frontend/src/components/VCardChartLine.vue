@@ -57,7 +57,6 @@ export default {
       }
     },
   },
-
   methods: {
     serializeMovement(key, data) {
       return data.reduce((acc, { date, amount }) => {

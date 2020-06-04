@@ -17,7 +17,7 @@
     </v-row>
 
     <v-fade-transition mode="out-in">
-      <router-view />
+      <router-view v-bind="{ loading }" />
     </v-fade-transition>
   </v-container>
 </template>
