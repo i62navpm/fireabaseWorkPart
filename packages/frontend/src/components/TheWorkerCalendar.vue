@@ -12,8 +12,9 @@
     >
       <v-calendar
         ref="calendar"
-        v-bind="{ start, weekdays, type, events }"
+        v-bind="{ start, weekdays, type, events, eventColor }"
         color="primary"
+        @click:event="({ event }) => openEventForm({ event: event.form })"
       >
         <template
           v-slot:day-label="{ present, date, day, month: calendarMonth }"
@@ -23,7 +24,7 @@
             :color="present ? 'primary' : ''"
             text
             small
-            @click="openNewEventForm(date)"
+            @click="openEventForm({ date })"
           >
             {{ day }}
           </v-btn>
@@ -83,29 +84,37 @@ export default {
     },
   },
   methods: {
+    eventColor(event) {
+      return this.$options.filters.eventColor(event.type)
+    },
     serializeMovement(movements) {
       return movements.map((movement) => ({
         start: movement.date,
-        name: `amount: ${movement.amount}`,
+        type: movement.salary,
+        name: `${movement.salary}: ${movement.amount}`,
+        form: movement,
       }))
     },
-    openNewEventForm(date) {
-      this.$refs.eventForm.openDialog(date)
+    openEventForm({ event, date }) {
+      this.$refs.eventForm.openDialog({ event, date })
     },
     async saveEvent(cb) {
       try {
-        const data = JSON.parse(JSON.stringify(this.$refs.eventForm.event))
+        const { id, ...data } = { ...this.$refs.eventForm.event }
         const createdAt = dayjs().toISOString()
 
-        await this.$store.dispatch('createIncomeEvent', {
+        const action = id ? 'updateIncomeEvent' : 'createIncomeEvent'
+
+        await this.$store.dispatch(action, {
+          id,
           event: { createdAt, ...data },
-          id: this.worker.id,
+          workerId: this.worker.id,
           month: this.month,
           year: this.year,
         })
         this.$refs.eventForm.closeDialog()
         this.notifySuccess('Evento guardado')
-      } catch {
+      } catch (err) {
         this.notifyError('Error al guardar')
       } finally {
         cb()

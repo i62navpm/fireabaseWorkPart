@@ -126,12 +126,10 @@ export default {
     },
   },
   methods: {
-    openDialog(date, event) {
+    openDialog({ date, event }) {
       this.event = event
-        ? { ...event }
-        : { salary: 'fullSalary', amount: this.worker.fullSalary }
-
-      this.event.date = date
+        ? { ...event, id: event.id }
+        : { salary: 'fullSalary', amount: this.worker.fullSalary, date }
       this.open = true
     },
     closeDialog() {

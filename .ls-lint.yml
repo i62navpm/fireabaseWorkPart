@@ -1,5 +1,4 @@
 ls:
   packages/*/{src}:
-    .vue: PascalCase
     .dir: kebab-case
     .js: camelCase

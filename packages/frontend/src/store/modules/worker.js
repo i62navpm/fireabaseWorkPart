@@ -37,16 +37,29 @@ export default {
         )
     ),
     createIncomeEvent: firestoreAction(
-      ({ rootGetters }, { id, year, month, event }) =>
+      ({ rootGetters }, { workerId, year, month, event }) =>
         db
           .collection('users')
           .doc(rootGetters.getUser.email)
           .collection('workforce')
-          .doc(id)
+          .doc(workerId)
           .collection('income')
           .doc(year)
           .collection(month)
           .add(event)
+    ),
+    updateIncomeEvent: firestoreAction(
+      ({ rootGetters }, { workerId, id, year, month, event }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(workerId)
+          .collection('income')
+          .doc(year)
+          .collection(month)
+          .doc(id)
+          .update(event)
     ),
     // createWorker: firestoreAction(({ rootGetters }, worker) => {}),
     // updateWorker: firestoreAction(({ rootGetters }, { id, data }) => {}),
