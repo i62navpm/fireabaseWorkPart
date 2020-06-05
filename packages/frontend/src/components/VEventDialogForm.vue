@@ -56,6 +56,7 @@
                   ref="amount"
                   v-model="event.amount"
                   name="amount"
+                  type="number"
                   label="Salario"
                   :readonly="event.salary !== 'customSalary'"
                   :rules="[rules.required]"
