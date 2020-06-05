@@ -12,69 +12,53 @@
 
         <v-card-text>
           <v-container>
-            <v-row>
-              <v-col cols="12" sm="6">
+            <v-row justify="space-around">
+              <v-col cols="12" class="pb-0">
+                <v-row justify="space-around">
+                  <v-chip-group
+                    v-model="salary"
+                    mandatory
+                    column
+                    active-class="primary--text"
+                  >
+                    <v-chip
+                      filter
+                      value="fullSalary"
+                      outlined
+                      label
+                      color="success"
+                    >
+                      Salario completo
+                    </v-chip>
+                    <v-chip
+                      filter
+                      value="halfSalary"
+                      outlined
+                      label
+                      color="warning"
+                    >
+                      Salario parcial
+                    </v-chip>
+                    <v-chip
+                      filter
+                      value="customSalary"
+                      outlined
+                      label
+                      color="info"
+                    >
+                      Salario Personalizado
+                    </v-chip>
+                  </v-chip-group>
+                </v-row>
+              </v-col>
+              <v-col cols="6">
                 <v-text-field
-                  v-model="event.name"
-                  name="name"
-                  label="Nombre del trabajador"
-                  hint="Campo obligatorio"
+                  ref="amount"
+                  v-model="event.amount"
+                  name="amount"
+                  label="Salario"
+                  :readonly="event.salary !== 'customSalary'"
                   :rules="[rules.required]"
-                  persistent-hint
-                  autofocus
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="event.nif"
-                  v-mask="'########-A'"
-                  name="nif"
-                  label="NIF"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="event.phone"
-                  type="tel"
-                  name="phone"
-                  label="Teléfono"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="event.email"
-                  type="email"
-                  name="email"
-                  label="Email"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-address-input v-model="event.address" />
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="event.fullSalary"
-                  append-icon="mdi-cash-multiple"
-                  type="number"
-                  name="fullSalary"
-                  label="Salario completo"
-                  hint="Campo obligatorio"
-                  :rules="[rules.required]"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="event.halfSalary"
-                  append-icon="mdi-cash-multiple"
-                  type="number"
-                  name="halfSalary"
-                  label="Salario reducido"
-                  hint="Campo obligatorio"
-                  :rules="[rules.required]"
-                  persistent-hint
                   required
                 ></v-text-field>
               </v-col>
@@ -102,15 +86,18 @@
 
 <script>
 import { mask } from 'vue-the-mask'
-import VAddressInput from '@/components/VAddressInput'
 import loadingMixin from '@/mixins/loading'
 
 export default {
   directives: { mask },
-  components: {
-    VAddressInput,
-  },
   mixins: [loadingMixin],
+  props: {
+    worker: {
+      type: Object,
+      required: true,
+      default: () => ({}),
+    },
+  },
   data: () => ({
     open: false,
     valid: false,
@@ -120,10 +107,31 @@ export default {
       required: (value) => !!value || 'Este campo es obligatorio.',
     },
   }),
+  computed: {
+    salary: {
+      get() {
+        return this.event.salary
+      },
+      set(salary) {
+        this.event.amount = this.worker[salary] || this.worker['fullSalary']
+        this.event.salary = salary
+      },
+    },
+  },
+  watch: {
+    salary: function (value) {
+      if (value === 'customSalary') {
+        this.$nextTick(this.$refs.amount.focus)
+      }
+    },
+  },
   methods: {
     openDialog(date, event) {
-      if (event) this.event = { ...event }
+      this.event = event
+        ? { ...event }
+        : { salary: 'fullSalary', amount: this.worker.fullSalary }
 
+      this.event.date = date
       this.open = true
     },
     closeDialog() {

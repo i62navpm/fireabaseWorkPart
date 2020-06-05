@@ -1,6 +1,10 @@
 <template>
   <v-sheet height="600">
-    <v-event-dialog-form ref="eventForm" @onSubmit="saveEvent" />
+    <v-event-dialog-form
+      ref="eventForm"
+      v-bind="{ worker }"
+      @onSubmit="saveEvent"
+    />
     <v-skeleton-loader
       :loading="loading"
       transition="fade-transition"
@@ -45,6 +49,11 @@ export default {
       required: false,
       default: false,
     },
+    worker: {
+      type: Object,
+      required: true,
+      default: () => ({}),
+    },
   },
   data: () => ({
     type: 'month',
@@ -76,21 +85,24 @@ export default {
   methods: {
     serializeMovement(movements) {
       return movements.map((movement) => ({
-        start: this.transformDate(movement.date),
+        start: movement.date,
         name: `amount: ${movement.amount}`,
       }))
-    },
-    transformDate(date) {
-      const [day, month, year] = date.split('-')
-      return dayjs(`${year}-${month}-${day}`).format('YYYY-MM-DD')
     },
     openNewEventForm(date) {
       this.$refs.eventForm.openDialog(date)
     },
     async saveEvent(cb) {
       try {
-        console.log(this.$refs.eventForm.event)
+        const data = JSON.parse(JSON.stringify(this.$refs.eventForm.event))
+        const createdAt = dayjs().toISOString()
 
+        await this.$store.dispatch('createIncomeEvent', {
+          event: { createdAt, ...data },
+          id: this.worker.id,
+          month: this.month,
+          year: this.year,
+        })
         this.$refs.eventForm.closeDialog()
         this.notifySuccess('Evento guardado')
       } catch {

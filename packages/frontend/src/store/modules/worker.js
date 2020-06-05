@@ -1,13 +1,6 @@
 import { firestoreAction } from 'vuexfire'
 import { db } from '@/plugins/firebase/db'
 
-function serializeFn({ year, month }) {
-  return (snapshot) => ({
-    date: `${snapshot.id}-${month}-${year}`,
-    ...snapshot.data(),
-  })
-}
-
 export default {
   state: {
     income: [],
@@ -26,8 +19,7 @@ export default {
             .doc(id)
             .collection('income')
             .doc(year)
-            .collection(month),
-          { serialize: serializeFn({ year, month }) }
+            .collection(month)
         )
     ),
     outcomeRef: firestoreAction(
@@ -41,9 +33,20 @@ export default {
             .doc(id)
             .collection('outcome')
             .doc(year)
-            .collection(month),
-          { serialize: serializeFn({ year, month }) }
+            .collection(month)
         )
+    ),
+    createIncomeEvent: firestoreAction(
+      ({ rootGetters }, { id, year, month, event }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(id)
+          .collection('income')
+          .doc(year)
+          .collection(month)
+          .add(event)
     ),
     // createWorker: firestoreAction(({ rootGetters }, worker) => {}),
     // updateWorker: firestoreAction(({ rootGetters }, { id, data }) => {}),

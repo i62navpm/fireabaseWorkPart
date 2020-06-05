@@ -60,9 +60,15 @@ export default {
   methods: {
     serializeMovement(key, data) {
       return data.reduce((acc, { date, amount }) => {
-        acc[date] = { [key]: amount }
+        date = this.transformDate(date)
+        amount = +amount
+        acc[date] = { [key]: acc[date] ? acc[date][key] + amount : amount }
         return acc
       }, {})
+    },
+    transformDate(date) {
+      const [year, month, day] = date.split('-')
+      return `${day}-${month}-${year}`
     },
   },
 }
