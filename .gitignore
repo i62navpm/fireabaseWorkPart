@@ -71,3 +71,6 @@ junit.xml
 
 # lighthouseci output reporter
 .lighthouseci
+
+# firebase folder
+.firebase
