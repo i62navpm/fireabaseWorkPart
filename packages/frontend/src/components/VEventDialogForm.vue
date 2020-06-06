@@ -4,11 +4,13 @@
       ref="eventIncomeForm"
       v-bind="{ worker }"
       @onSubmit="saveIncomeEvent"
+      @onRemove="removeIncomeEvent"
     />
     <v-event-outcome-dialog-form
       ref="eventOutcomeForm"
       v-bind="{ worker }"
       @onSubmit="saveOutcomeEvent"
+      @onRemove="removeOutcomeEvent"
     />
     <v-bottom-sheet v-model="open" inset>
       <v-list>
@@ -107,7 +109,7 @@ export default {
           year: this.year,
         }
 
-        await this.saveEvent(action, data)
+        await this.dispatchEvent(action, data)
 
         this.$refs.eventIncomeForm.closeDialog()
         this.notifySuccess('Evento guardado')
@@ -130,7 +132,7 @@ export default {
           year: this.year,
         }
 
-        await this.saveEvent(action, data)
+        await this.dispatchEvent(action, data)
 
         this.$refs.eventOutcomeForm.closeDialog()
         this.notifySuccess('Evento guardado')
@@ -140,7 +142,49 @@ export default {
         cb()
       }
     },
-    saveEvent(action, data) {
+    async removeIncomeEvent(cb) {
+      try {
+        const { id } = { ...this.$refs.eventIncomeForm.event }
+        const action = 'removeIncomeEvent'
+        const data = {
+          id,
+          workerId: this.worker.id,
+          month: this.month,
+          year: this.year,
+        }
+
+        await this.dispatchEvent(action, data)
+
+        this.$refs.eventIncomeForm.closeDialog()
+        this.notifyWarning('Evento eliminado')
+      } catch (err) {
+        this.notifyError('Error al eliminar')
+      } finally {
+        cb()
+      }
+    },
+    async removeOutcomeEvent(cb) {
+      try {
+        const { id } = { ...this.$refs.eventOutcomeForm.event }
+        const action = 'removeOutcomeEvent'
+        const data = {
+          id,
+          workerId: this.worker.id,
+          month: this.month,
+          year: this.year,
+        }
+
+        await this.dispatchEvent(action, data)
+
+        this.$refs.eventOutcomeForm.closeDialog()
+        this.notifyWarning('Evento eliminado')
+      } catch (err) {
+        this.notifyError('Error al eliminar')
+      } finally {
+        cb()
+      }
+    },
+    dispatchEvent(action, data) {
       return this.$store.dispatch(action, data)
     },
   },

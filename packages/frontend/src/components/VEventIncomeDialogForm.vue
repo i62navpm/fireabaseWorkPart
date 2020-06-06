@@ -72,7 +72,16 @@
           <v-spacer></v-spacer>
 
           <v-btn
+            v-if="event.id"
             text
+            :loading="loading"
+            color="error"
+            @click.native="remove"
+          >
+            Eliminar
+          </v-btn>
+          <v-btn
+            outlined
             :loading="loading"
             color="primary"
             type="submit"
@@ -137,6 +146,10 @@ export default {
       }
       this.startLoading()
       this.$emit('onSubmit', this.stopLoading)
+    },
+    remove() {
+      this.startLoading()
+      this.$emit('onRemove', this.stopLoading)
     },
   },
 }

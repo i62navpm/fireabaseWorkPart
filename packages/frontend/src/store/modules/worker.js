@@ -61,6 +61,19 @@ export default {
           .doc(id)
           .update(event)
     ),
+    removeIncomeEvent: firestoreAction(
+      ({ rootGetters }, { workerId, id, year, month }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(workerId)
+          .collection('income')
+          .doc(year)
+          .collection(month)
+          .doc(id)
+          .delete()
+    ),
     createOutcomeEvent: firestoreAction(
       ({ rootGetters }, { workerId, year, month, event }) =>
         db
@@ -85,6 +98,19 @@ export default {
           .collection(month)
           .doc(id)
           .update(event)
+    ),
+    removeOutcomeEvent: firestoreAction(
+      ({ rootGetters }, { workerId, id, year, month }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(workerId)
+          .collection('outcome')
+          .doc(year)
+          .collection(month)
+          .doc(id)
+          .delete()
     ),
   },
   getters: {
