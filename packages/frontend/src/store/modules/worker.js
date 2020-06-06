@@ -37,16 +37,23 @@ export default {
         )
     ),
     createIncomeEvent: firestoreAction(
-      ({ rootGetters }, { workerId, year, month, event }) =>
-        db
-          .collection('users')
-          .doc(rootGetters.getUser.email)
-          .collection('workforce')
-          .doc(workerId)
-          .collection('income')
-          .doc(year)
-          .collection(month)
-          .add(event)
+      ({ rootGetters }, { workerId, year, month, events }) => {
+        const batch = db.batch()
+        events.forEach((event) => {
+          const monthRef = db
+            .collection('users')
+            .doc(rootGetters.getUser.email)
+            .collection('workforce')
+            .doc(workerId)
+            .collection('income')
+            .doc(year)
+            .collection(month)
+            .doc()
+          batch.set(monthRef, event)
+        })
+
+        return batch.commit()
+      }
     ),
     updateIncomeEvent: firestoreAction(
       ({ rootGetters }, { workerId, id, year, month, event }) =>
@@ -75,16 +82,23 @@ export default {
           .delete()
     ),
     createOutcomeEvent: firestoreAction(
-      ({ rootGetters }, { workerId, year, month, event }) =>
-        db
-          .collection('users')
-          .doc(rootGetters.getUser.email)
-          .collection('workforce')
-          .doc(workerId)
-          .collection('outcome')
-          .doc(year)
-          .collection(month)
-          .add(event)
+      ({ rootGetters }, { workerId, year, month, events }) => {
+        const batch = db.batch()
+        events.forEach((event) => {
+          const monthRef = db
+            .collection('users')
+            .doc(rootGetters.getUser.email)
+            .collection('workforce')
+            .doc(workerId)
+            .collection('outcome')
+            .doc(year)
+            .collection(month)
+            .doc()
+          batch.set(monthRef, event)
+        })
+
+        return batch.commit()
+      }
     ),
     updateOutcomeEvent: firestoreAction(
       ({ rootGetters }, { workerId, id, year, month, event }) =>

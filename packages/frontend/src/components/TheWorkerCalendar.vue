@@ -1,44 +1,58 @@
 <template>
   <v-sheet>
     <v-event-dialog-form ref="eventForm" v-bind="{ worker }" />
-    <v-skeleton-loader
-      height="600"
-      :loading="loading"
-      transition="fade-transition"
-      type="date-picker-days"
-    >
-      <v-calendar
-        ref="calendar"
-        :event-more="false"
-        v-bind="{ start, weekdays, type, events, eventColor }"
-        color="primary"
-        @click:event="({ event }) => openEventForm({ event: event.form })"
+    <vue-selecto
+      drag-container=".the-worker-calendar"
+      :selectable-targets="['.v-calendar-weekly__day-label .v-btn']"
+      :hit-rate="0"
+      :select-by-click="true"
+      :select-from-inside="true"
+      @select="onSelect"
+      @selectEnd="onSelectEnd"
+    ></vue-selecto>
+
+    <div class="the-worker-calendar">
+      <v-skeleton-loader
+        height="600"
+        :loading="loading"
+        transition="fade-transition"
+        type="date-picker-days"
       >
-        <template
-          v-slot:day-label="{ present, date, day, month: calendarMonth }"
+        <v-calendar
+          ref="calendar"
+          :event-more="false"
+          v-bind="{ start, weekdays, type, events, eventColor }"
+          color="primary"
+          @click:event="({ event }) => openEventForm({ event: event.form })"
         >
-          <v-btn
-            :disabled="calendarMonth !== +month"
-            :color="present ? 'primary' : ''"
-            text
-            small
-            @click="openEventForm({ date })"
+          <template
+            v-slot:day-label="{ present, date, day, month: calendarMonth }"
           >
-            {{ day }}
-          </v-btn>
-        </template>
-      </v-calendar>
-    </v-skeleton-loader>
+            <v-btn
+              class="mb-1"
+              :disabled="calendarMonth !== +month"
+              :color="present ? 'primary' : ''"
+              text
+              small
+            >
+              {{ day }}
+            </v-btn>
+          </template>
+        </v-calendar>
+      </v-skeleton-loader>
+    </div>
   </v-sheet>
 </template>
 
 <script>
 import dayjs from 'dayjs'
+import { VueSelecto } from 'vue-selecto'
 import VEventDialogForm from '@/components/VEventDialogForm'
 
 export default {
   components: {
     VEventDialogForm,
+    VueSelecto,
   },
   props: {
     loading: {
@@ -97,6 +111,24 @@ export default {
     openEventForm({ event, date }) {
       this.$refs.eventForm.openDialog({ event, date })
     },
+    onSelect(e) {
+      e.selected.forEach((el) => {
+        el.classList.add('selected')
+      })
+      e.removed.forEach((el) => {
+        el.classList.remove('selected')
+      })
+    },
+    onSelectEnd(e) {
+      const eventsSelected = e.selected
+        .filter((el) => !el.disabled)
+        .map((el) => `${this.year}-${this.month}-${el.innerText}`)
+      e.selected.forEach((el) => el.classList.remove('selected'))
+
+      if (eventsSelected.length) {
+        this.openEventForm({ date: eventsSelected.sort() })
+      }
+    },
   },
 }
 </script>
@@ -104,5 +136,15 @@ export default {
 <style lang="scss">
 .v-calendar-weekly__week {
   min-height: 100px !important;
+}
+
+.v-calendar-weekly__day-label {
+  .v-btn {
+    transition: all ease 0.2s;
+  }
+  .selected.v-btn:not(:disabled) {
+    background: #2094f380;
+    color: white;
+  }
 }
 </style>

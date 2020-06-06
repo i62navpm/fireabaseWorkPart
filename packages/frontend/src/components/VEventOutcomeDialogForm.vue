@@ -95,7 +95,6 @@ export default {
     open: false,
     valid: false,
     event: {},
-    date: '',
     rules: {
       required: (value) => !!value || 'Este campo es obligatorio.',
     },
@@ -112,10 +111,10 @@ export default {
     },
   },
   methods: {
-    openDialog({ date, event }) {
+    openDialog({ event }) {
       this.event = event
         ? { ...event, id: event.id }
-        : { salary: 'fullSalary', amount: this.worker.fullSalary, date }
+        : { salary: 'fullSalary', amount: this.worker.fullSalary }
       this.open = true
     },
     closeDialog() {

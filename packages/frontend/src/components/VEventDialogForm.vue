@@ -86,14 +86,12 @@ export default {
       this.closeDialog()
       this.$refs.eventIncomeForm.openDialog({
         event: this.event,
-        date: this.date,
       })
     },
     openEventOutcome() {
       this.closeDialog()
       this.$refs.eventOutcomeForm.openDialog({
         event: this.event,
-        date: this.date,
       })
     },
     async saveIncomeEvent(cb) {
@@ -109,7 +107,15 @@ export default {
           year: this.year,
         }
 
-        await this.dispatchEvent(action, data)
+        if (action === 'updateIncomeEvent') {
+          await this.dispatchEvent(action, data)
+        } else {
+          data.events = this.date.map((date) => ({
+            ...data.event,
+            date,
+          }))
+          await this.dispatchEvent(action, data)
+        }
 
         this.$refs.eventIncomeForm.closeDialog()
         this.notifySuccess('Evento guardado')
@@ -132,7 +138,15 @@ export default {
           year: this.year,
         }
 
-        await this.dispatchEvent(action, data)
+        if (action === 'updateOutcomeEvent') {
+          await this.dispatchEvent(action, data)
+        } else {
+          data.events = this.date.map((date) => ({
+            ...data.event,
+            date,
+          }))
+          await this.dispatchEvent(action, data)
+        }
 
         this.$refs.eventOutcomeForm.closeDialog()
         this.notifySuccess('Evento guardado')
