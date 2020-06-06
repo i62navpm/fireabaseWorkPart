@@ -1,10 +1,6 @@
 <template>
   <v-sheet height="600">
-    <v-event-dialog-form
-      ref="eventForm"
-      v-bind="{ worker }"
-      @onSubmit="saveEvent"
-    />
+    <v-event-dialog-form ref="eventForm" v-bind="{ worker }" />
     <v-skeleton-loader
       :loading="loading"
       transition="fade-transition"
@@ -37,13 +33,11 @@
 <script>
 import dayjs from 'dayjs'
 import VEventDialogForm from '@/components/VEventDialogForm'
-import notificationMixin from '@/mixins/notification'
 
 export default {
   components: {
     VEventDialogForm,
   },
-  mixins: [notificationMixin],
   props: {
     loading: {
       type: Boolean,
@@ -97,28 +91,6 @@ export default {
     },
     openEventForm({ event, date }) {
       this.$refs.eventForm.openDialog({ event, date })
-    },
-    async saveEvent(cb) {
-      try {
-        const { id, ...data } = { ...this.$refs.eventForm.event }
-        const createdAt = dayjs().toISOString()
-
-        const action = id ? 'updateIncomeEvent' : 'createIncomeEvent'
-
-        await this.$store.dispatch(action, {
-          id,
-          event: { createdAt, ...data },
-          workerId: this.worker.id,
-          month: this.month,
-          year: this.year,
-        })
-        this.$refs.eventForm.closeDialog()
-        this.notifySuccess('Evento guardado')
-      } catch (err) {
-        this.notifyError('Error al guardar')
-      } finally {
-        cb()
-      }
     },
   },
 }
