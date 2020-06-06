@@ -156,7 +156,7 @@ export default {
         await this.dispatchEvent(action, data)
 
         this.$refs.eventIncomeForm.closeDialog()
-        this.notifyWarning('Evento eliminado')
+        this.notifySuccess('Evento eliminado')
       } catch (err) {
         this.notifyError('Error al eliminar')
       } finally {
@@ -177,7 +177,7 @@ export default {
         await this.dispatchEvent(action, data)
 
         this.$refs.eventOutcomeForm.closeDialog()
-        this.notifyWarning('Evento eliminado')
+        this.notifySuccess('Evento eliminado')
       } catch (err) {
         this.notifyError('Error al eliminar')
       } finally {

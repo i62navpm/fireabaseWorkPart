@@ -1,7 +1,8 @@
 <template>
-  <v-sheet height="600">
+  <v-sheet>
     <v-event-dialog-form ref="eventForm" v-bind="{ worker }" />
     <v-skeleton-loader
+      height="600"
       :loading="loading"
       transition="fade-transition"
       type="date-picker-days"
@@ -86,7 +87,10 @@ export default {
       return movements.map((movement) => ({
         start: movement.date,
         type: movement.salary,
-        name: `${movement.salary}: ${movement.amount}`,
+        name:
+          movement.salary !== 'debtSalary'
+            ? `Salario: ${movement.amount}€`
+            : `A cuenta: ${movement.amount}€`,
         form: movement,
       }))
     },
@@ -96,3 +100,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.v-calendar-weekly__week {
+  min-height: 100px;
+}
+</style>
