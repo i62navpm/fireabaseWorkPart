@@ -1,5 +1,7 @@
 <template>
   <v-snackbar
+    top
+    right
     :value="notification.show"
     :color="notification.color"
     multi-line

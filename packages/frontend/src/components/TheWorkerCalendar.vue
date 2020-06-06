@@ -8,6 +8,7 @@
     >
       <v-calendar
         ref="calendar"
+        :event-more="false"
         v-bind="{ start, weekdays, type, events, eventColor }"
         color="primary"
         @click:event="({ event }) => openEventForm({ event: event.form })"
