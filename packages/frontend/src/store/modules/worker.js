@@ -61,8 +61,31 @@ export default {
           .doc(id)
           .update(event)
     ),
-    // createWorker: firestoreAction(({ rootGetters }, worker) => {}),
-    // updateWorker: firestoreAction(({ rootGetters }, { id, data }) => {}),
+    createOutcomeEvent: firestoreAction(
+      ({ rootGetters }, { workerId, year, month, event }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(workerId)
+          .collection('outcome')
+          .doc(year)
+          .collection(month)
+          .add(event)
+    ),
+    updateOutcomeEvent: firestoreAction(
+      ({ rootGetters }, { workerId, id, year, month, event }) =>
+        db
+          .collection('users')
+          .doc(rootGetters.getUser.email)
+          .collection('workforce')
+          .doc(workerId)
+          .collection('outcome')
+          .doc(year)
+          .collection(month)
+          .doc(id)
+          .update(event)
+    ),
   },
   getters: {
     getWorkerMovements: (state) => state,
