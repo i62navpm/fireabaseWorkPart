@@ -103,6 +103,6 @@ export default {
 
 <style lang="scss">
 .v-calendar-weekly__week {
-  min-height: 100px;
+  min-height: 100px !important;
 }
 </style>
