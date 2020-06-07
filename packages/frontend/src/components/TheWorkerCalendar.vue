@@ -34,6 +34,7 @@
               :color="present ? 'primary' : ''"
               text
               small
+              @click="openEventForm({ date: [date] })"
             >
               {{ day }}
             </v-btn>
@@ -92,6 +93,11 @@ export default {
     events() {
       return [...this.workerIncome, ...this.workerOutcome]
     },
+  },
+  mounted() {
+    document
+      .querySelector('.the-worker-calendar')
+      .addEventListener('touchend', (e) => e.target.click())
   },
   methods: {
     eventColor(event) {
