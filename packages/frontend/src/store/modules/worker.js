@@ -20,6 +20,7 @@ export default {
             .collection('income')
             .doc(year)
             .collection(month)
+            .orderBy('createdAt')
         )
     ),
     outcomeRef: firestoreAction(
@@ -34,6 +35,7 @@ export default {
             .collection('outcome')
             .doc(year)
             .collection(month)
+            .orderBy('createdAt')
         )
     ),
     createIncomeEvent: firestoreAction(
