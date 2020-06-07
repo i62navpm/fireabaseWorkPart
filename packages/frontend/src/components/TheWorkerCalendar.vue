@@ -5,8 +5,6 @@
       drag-container=".the-worker-calendar"
       :selectable-targets="['.v-calendar-weekly__day-label .v-btn']"
       :hit-rate="0"
-      :select-by-click="true"
-      :select-from-inside="true"
       @select="onSelect"
       @selectEnd="onSelectEnd"
     ></vue-selecto>
@@ -34,7 +32,6 @@
               :color="present ? 'primary' : ''"
               text
               small
-              @click="openEventForm({ date: [date] })"
             >
               {{ day }}
             </v-btn>
@@ -128,7 +125,7 @@ export default {
     onSelectEnd(e) {
       const eventsSelected = e.selected
         .filter((el) => !el.disabled)
-        .map((el) => `${this.year}-${this.month}-${el.innerText}`)
+        .map((el) => `${this.year}-${this.month}-${el.innerText.trim()}`)
       e.selected.forEach((el) => el.classList.remove('selected'))
 
       if (eventsSelected.length) {
