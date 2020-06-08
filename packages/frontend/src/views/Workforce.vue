@@ -40,8 +40,9 @@ export default {
     this.startLoading()
     try {
       await this.$store.dispatch('workforceRef')
+      await this.$store.dispatch('workRef')
     } catch {
-      this.notifyError('Error al obtener la plantilla')
+      this.notifyError('Error al obtener la plantilla o las obras')
     } finally {
       this.stopLoading()
     }

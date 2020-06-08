@@ -78,11 +78,9 @@
 </template>
 
 <script>
-import { mask } from 'vue-the-mask'
 import loadingMixin from '@/mixins/loading'
 
 export default {
-  directives: { mask },
   mixins: [loadingMixin],
   props: {
     worker: {

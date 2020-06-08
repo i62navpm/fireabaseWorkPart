@@ -64,6 +64,9 @@
                   required
                 ></v-text-field>
               </v-col>
+              <v-col cols="12">
+                <v-work-place-select v-model="event.work" />
+              </v-col>
             </v-row>
           </v-container>
         </v-card-text>
@@ -96,11 +99,11 @@
 </template>
 
 <script>
-import { mask } from 'vue-the-mask'
+import VWorkPlaceSelect from '@/components/VWorkPlaceSelect'
 import loadingMixin from '@/mixins/loading'
 
 export default {
-  directives: { mask },
+  components: { VWorkPlaceSelect },
   mixins: [loadingMixin],
   props: {
     worker: {
@@ -132,7 +135,7 @@ export default {
     openDialog({ event }) {
       this.event = event
         ? { ...event, id: event.id }
-        : { salary: 'fullSalary', amount: this.worker.fullSalary }
+        : { salary: 'fullSalary', work: [], amount: this.worker.fullSalary }
       this.open = true
     },
     closeDialog() {
