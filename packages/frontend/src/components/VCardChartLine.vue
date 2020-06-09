@@ -29,7 +29,7 @@ export default {
 
       return Array.from(
         { length: days },
-        (v, k) => `${(k + 1).toString().padStart(2, '0')}-${month}-${year}`
+        (v, k) => `${(k + 1).toString()}-${month}-${year}`
       )
     },
     workerMovements() {
