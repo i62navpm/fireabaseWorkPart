@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <the-breadcrumbs />
+    <the-breadcrumbs class="d-print-none" />
 
-    <v-load-data :loading="loading">
+    <v-load-data :loading="loading" class="d-print-none">
       <template #loading>
         <the-workforce-carousel-skeleton />
       </template>

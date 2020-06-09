@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <TheToolbar />
+    <TheToolbar class="d-print-none" />
     <TheNotification />
 
     <v-content>

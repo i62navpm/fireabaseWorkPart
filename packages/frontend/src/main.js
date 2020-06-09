@@ -8,6 +8,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import App from './App.vue'
+import './scss/print.scss'
 
 Vue.config.productionTip = false
 
