@@ -19,12 +19,27 @@ export default {
           .orderBy('createdAt')
       )
     ),
+    getWorkRef: firestoreAction(({ rootGetters }, id) =>
+      db
+        .collection('users')
+        .doc(rootGetters.getUser.email)
+        .collection('work')
+        .doc(id)
+    ),
     createWork: firestoreAction(({ rootGetters }, work) =>
       db
         .collection('users')
         .doc(rootGetters.getUser.email)
         .collection('work')
         .add(work)
+    ),
+    removeWork: firestoreAction(({ rootGetters }, id) =>
+      db
+        .collection('users')
+        .doc(rootGetters.getUser.email)
+        .collection('work')
+        .doc(id)
+        .delete()
     ),
     updateWork: firestoreAction(({ rootGetters }, { id, data }) => {
       db.collection('users')
@@ -36,7 +51,5 @@ export default {
   },
   getters: {
     getWorks: (state) => state.works,
-    getWorkRef: (state) => (workId) =>
-      state.works.find(({ id }) => id === workId),
   },
 }

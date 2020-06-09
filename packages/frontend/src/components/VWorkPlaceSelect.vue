@@ -2,6 +2,7 @@
   <div>
     <v-work-place-dialog-form ref="workPlaceForm" @onSubmit="saveWorkPlace" />
     <v-autocomplete
+      class="pt-0"
       :value="value"
       :items="works"
       :search-input.sync="search"
@@ -19,17 +20,23 @@
       <template v-slot:item="data">
         <v-list-item-content class="v-workplace-select-item">
           <v-list-item-title>{{ data.item.name }}</v-list-item-title>
-          <v-list-item-subtitle class="text-truncate">{{
-            data.item.address
-          }}</v-list-item-subtitle>
+          <v-list-item-subtitle class="text-truncate">
+            {{ data.item.address }}
+          </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-icon>
           <v-icon
             color="info"
-            small
+            class="mr-5"
             @click.native.stop="openWorkPlaceDialog(data.item)"
           >
             mdi-pencil
+          </v-icon>
+          <v-icon
+            color="error"
+            @click.native.stop="removeWorkPlaceDialog(data.item.id)"
+          >
+            mdi-delete
           </v-icon>
         </v-list-item-icon>
       </template>
@@ -88,8 +95,23 @@ export default {
     openWorkPlaceDialog(work) {
       this.$refs.workPlaceForm.openDialog(work)
     },
-    changeInput(value) {
-      this.$emit('input', value)
+    async removeWorkPlaceDialog(id) {
+      try {
+        await this.$store.dispatch('removeWork', id)
+        this.notifySuccess('Obra eliminada')
+      } catch {
+        this.notifyError('Error al borrar la obra')
+      }
+    },
+    async changeInput(works) {
+      try {
+        const refs = await Promise.all(
+          works.map((work) => this.$store.dispatch('getWorkRef', work))
+        )
+        this.$emit('input', refs)
+      } catch {
+        this.notifyError('Error al obtener las referencias')
+      }
     },
     async saveWorkPlace(cb) {
       try {
@@ -120,6 +142,6 @@ export default {
 
 <style lang="scss">
 .v-workplace-select-item {
-  max-width: 450px !important;
+  max-width: 428px !important;
 }
 </style>
