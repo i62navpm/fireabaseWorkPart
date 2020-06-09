@@ -24,7 +24,7 @@
           :to="{ name: $route.name === 'calendar' ? 'summary' : 'calendar' }"
         >
           <v-icon>{{
-            $route.name === 'calendar' ? 'mdi-printer' : 'mdi-calendar'
+            $route.name === 'calendar' ? 'mdi-table' : 'mdi-calendar'
           }}</v-icon>
         </v-btn>
       </v-list-item-action>

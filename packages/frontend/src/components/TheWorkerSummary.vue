@@ -13,14 +13,32 @@
         dense
         hide-default-footer
       >
-        <template v-slot:item.income="{ value }">
-          {{ value ? `${value} €` : '-' }}
+        <template v-slot:item.date="{ item, value }">
+          <div :class="isLastRow(item) && 'my-6 subtitle-1'">
+            {{ value }}
+          </div>
         </template>
-        <template v-slot:item.outcome="{ value }">
-          {{ value ? `${value} €` : '-' }}
+        <template v-slot:item.income="{ item, value }">
+          <span :class="isLastRow(item) && 'info--text subtitle-1'">
+            {{ value ? `${value} €` : '-' }}
+          </span>
         </template>
-        <template v-slot:item.work="{ value }">
-          {{ value }}
+        <template v-slot:item.outcome="{ item, value }">
+          <span :class="isLastRow(item) && 'error--text subtitle-1'">
+            {{ value ? `${value} €` : '-' }}
+          </span>
+        </template>
+        <template v-slot:item.work="{ item, value }">
+          <div
+            :class="
+              isLastRow(item) &&
+              `${
+                value < 0 ? 'error--text' : 'green--text'
+              } text-center subtitle-1`
+            "
+          >
+            {{ isLastRow(item) ? `${value} €` : value }}
+          </div>
         </template>
       </v-data-table>
     </v-card>
@@ -104,6 +122,20 @@ export default {
         return acc
       }, [])
 
+      const total = rows.reduce(
+        (acc, curr) => {
+          acc.income += curr.income
+          acc.outcome += curr.outcome
+          return acc
+        },
+        { income: 0, outcome: 0 }
+      )
+      rows.push({
+        date: 'TOTAL',
+        income: total.income,
+        outcome: total.outcome,
+        work: total.income - total.outcome,
+      })
       return rows
     },
   },
@@ -130,6 +162,9 @@ export default {
     shortDate(date) {
       const [day, month] = date.split('-')
       return `${day}/${month}`
+    },
+    isLastRow(item) {
+      return item.date === 'TOTAL'
     },
   },
 }
