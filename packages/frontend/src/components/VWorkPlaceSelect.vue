@@ -32,12 +32,6 @@
           >
             mdi-pencil
           </v-icon>
-          <v-icon
-            color="error"
-            @click.native.stop="removeWorkPlaceDialog(data.item.id)"
-          >
-            mdi-delete
-          </v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:no-data>
@@ -95,27 +89,23 @@ export default {
     openWorkPlaceDialog(work) {
       this.$refs.workPlaceForm.openDialog(work)
     },
-    async removeWorkPlaceDialog(id) {
-      try {
-        await this.$store.dispatch('removeWork', id)
-        this.notifySuccess('Obra eliminada')
-      } catch {
-        this.notifyError('Error al borrar la obra')
-      }
-    },
     async changeInput(works) {
       try {
         const refs = await Promise.all(
-          works.map((work) => this.$store.dispatch('getWorkRef', work))
+          works.map((work) =>
+            work.id ? work : this.$store.dispatch('getWorkRef', work)
+          )
         )
         this.$emit('input', refs)
-      } catch {
+      } catch (err) {
         this.notifyError('Error al obtener las referencias')
       }
     },
     async saveWorkPlace(cb) {
       try {
-        const { id, ...work } = { ...this.$refs.workPlaceForm.work }
+        const { id, ...work } = JSON.parse(
+          JSON.stringify(this.$refs.workPlaceForm.work)
+        )
         const createdAt = dayjs().toISOString()
         const data = {
           createdAt,
