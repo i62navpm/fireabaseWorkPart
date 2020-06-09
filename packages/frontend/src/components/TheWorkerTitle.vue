@@ -17,6 +17,17 @@
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action>
+        <v-btn
+          icon
+          class="mr-4"
+          :to="{ name: $route.name === 'calendar' ? 'summary' : 'calendar' }"
+        >
+          <v-icon>{{
+            $route.name === 'calendar' ? 'mdi-printer' : 'mdi-calendar'
+          }}</v-icon>
+        </v-btn>
+      </v-list-item-action>
+      <v-list-item-action>
         <v-btn icon @click="openWorkerForm">
           <v-icon>mdi-account-edit</v-icon>
         </v-btn>
