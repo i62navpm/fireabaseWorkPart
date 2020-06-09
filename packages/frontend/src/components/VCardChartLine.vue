@@ -16,7 +16,7 @@ export default {
       colors: ['#4caf50', '#ff5252'],
       settings: {
         labelMap: {
-          income: 'Ingreso',
+          income: 'A pagar',
           outcome: 'A cuenta',
         },
       },

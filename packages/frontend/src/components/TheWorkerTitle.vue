@@ -20,6 +20,7 @@
         <v-btn
           icon
           class="mr-4"
+          exact
           :to="{ name: $route.name === 'calendar' ? 'summary' : 'calendar' }"
         >
           <v-icon>{{
