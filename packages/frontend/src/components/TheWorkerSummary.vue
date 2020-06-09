@@ -20,12 +20,12 @@
         </template>
         <template v-slot:item.income="{ item, value }">
           <span :class="isLastRow(item) && 'info--text subtitle-1'">
-            {{ value ? `${value} €` : '-' }}
+            {{ value | amountCurrency }}
           </span>
         </template>
         <template v-slot:item.outcome="{ item, value }">
           <span :class="isLastRow(item) && 'error--text subtitle-1'">
-            {{ value ? `${value} €` : '-' }}
+            {{ value | amountCurrency }}
           </span>
         </template>
         <template v-slot:item.work="{ item, value }">
@@ -37,7 +37,9 @@
               } text-center subtitle-1`
             "
           >
-            {{ isLastRow(item) ? `${value} €` : value }}
+            {{
+              isLastRow(item) ? $options.filters.amountCurrency(value) : value
+            }}
           </div>
         </template>
       </v-data-table>
@@ -149,7 +151,7 @@ export default {
       }, {})
     },
     serializeWork(data) {
-      return data.reduce((acc, { date, work }) => {
+      return data.reduce((acc, { date, work = [] }) => {
         date = this.transformDate(date)
         acc[date] = work.map((item) => item.name).join(', ')
         return acc

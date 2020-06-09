@@ -17,6 +17,20 @@
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action>
+        <v-fade-transition mode="out-in">
+          <v-btn
+            v-if="$route.name === 'summary'"
+            icon
+            class="mr-4"
+            @click="print()"
+          >
+            <v-icon>
+              mdi-printer
+            </v-icon>
+          </v-btn>
+        </v-fade-transition>
+      </v-list-item-action>
+      <v-list-item-action>
         <v-btn
           icon
           class="mr-4"
@@ -65,6 +79,9 @@ export default {
     },
   },
   methods: {
+    print() {
+      window.print()
+    },
     openWorkerForm() {
       this.$refs.workerForm.openDialog(this.worker)
     },
