@@ -1,7 +1,16 @@
 <template>
   <v-app-bar app elevate-on-scroll color="white">
     <v-toolbar-title>
-      <router-link to="/">Diario</router-link>
+      <router-link to="/">
+        <v-list-item class="px-0">
+          <v-list-item-avatar class="mr-3">
+            <v-img src="../assets/logo.png" contain></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            Nóminas
+          </v-list-item-content>
+        </v-list-item>
+      </router-link>
     </v-toolbar-title>
 
     <v-spacer />
