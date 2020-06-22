@@ -153,6 +153,7 @@ jobs:
 
   sentryRelease:
     needs: [createRelease]
+    name: Create Sentry release
     runs-on: ubuntu-latest
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
