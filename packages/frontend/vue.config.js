@@ -4,9 +4,9 @@ module.exports = {
     iconPaths: {
       favicon32: null,
       favicon16: null,
-      appleTouchIcon: 'img/icons/apple-touch-icon.webp',
-      maskIcon: 'img/icons/safari-pinned-tab.svg',
-      msTileImage: 'img/icons/msapplication-icon-144x144.webp',
+      appleTouchIcon: null,
+      maskIcon: null,
+      msTileImage: 'img/icons/mstile-150x150.webp',
     },
     manifestOptions: {
       name: 'Nóminas',
