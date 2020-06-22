@@ -5,6 +5,7 @@ module.exports = {
       assertions: {
         'font-display': 'warn',
         'unused-css-rules': 'warn',
+        'uses-rel-preconnect': 'warn',
       },
     },
     collect: {
