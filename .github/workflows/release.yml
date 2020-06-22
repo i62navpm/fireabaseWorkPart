@@ -2,7 +2,7 @@ name: WorkPart Sentry Release
 
 on:
   release:
-    types: [created]
+    types: [published, prereleased, released, created]
 
 jobs:
   sentryRelease:
