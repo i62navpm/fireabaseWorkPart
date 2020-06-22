@@ -11,8 +11,8 @@ import App from './App.vue'
 import './scss/print.scss'
 
 if (process.env.NODE_ENV === 'production') {
-  import('./plugins/firebase/analytics').catch()
-  import('./plugins/sentry').catch()
+  import('./plugins/firebase/analytics')
+  import('./plugins/sentry')
 }
 
 Vue.config.productionTip = false

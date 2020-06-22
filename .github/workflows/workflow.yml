@@ -60,7 +60,7 @@ jobs:
         uses: coverallsapp/github-action@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './packages/frontend/coverage/lcov.info'
+          path-to-lcov: 'packages/frontend/coverage/lcov.info'
 
   e2eTest:
     name: E2E test
@@ -89,7 +89,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Running test:e2e
-        run: yarn --cwd packages/frontend/ test:e2e --headless
+        run: yarn --cwd packages/frontend/ test:e2e  --mode development --headless
 
   lighthouseTest:
     name: Lighthuose test
@@ -120,7 +120,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Build project
-        run: yarn build
+        run: yarn build --mode development
       - name: run Lighthouse CI
         run: lhci autorun
         env:
