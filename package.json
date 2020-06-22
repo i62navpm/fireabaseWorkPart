@@ -24,7 +24,7 @@
   "homepage": "https://github.com/i62navpm/firebaseWorkPart#readme",
   "scripts": {
     "build": "lerna run build",
-    "test:unit": "jest",
+    "test:unit": "lerna run test:unit --",
     "test:e2e": "lerna run test:e2e --"
   },
   "devDependencies": {
