@@ -21,7 +21,7 @@
           <v-btn
             v-if="$route.name === 'summary'"
             icon
-            class="mr-4"
+            class="mr-4 hidden-sm-and-down"
             @click="print()"
           >
             <v-icon>

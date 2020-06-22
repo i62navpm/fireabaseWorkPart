@@ -3,11 +3,11 @@
     <TheToolbar class="d-print-none" />
     <TheNotification />
 
-    <v-content>
+    <v-main>
       <v-fade-transition mode="out-in">
         <router-view v-if="!loading" />
       </v-fade-transition>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

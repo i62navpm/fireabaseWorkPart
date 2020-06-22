@@ -30,8 +30,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-app-bar.v-app-bar--hide-shadow {
-  box-shadow: 0 1px 0 0 #dadce0;
+header.v-app-bar.v-app-bar--hide-shadow {
+  box-shadow: 0 1px 0 0 #dadce0 !important;
 }
 .v-toolbar__title a {
   color: inherit;
