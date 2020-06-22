@@ -25,5 +25,4 @@ jobs:
           sentry-cli releases set-commits --auto $SENTRY_RELEASE
           sentry-cli releases finalize $SENTRY_RELEASE
 
-          # Create new deploy for this Sentry release
           sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_DEPLOY_ENVIRONMENT
