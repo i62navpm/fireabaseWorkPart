@@ -3,7 +3,7 @@ name: WorkPart Sentry Release
 on:
   push:
     tags:
-      - v*
+      - refs/tags/v*
 
 jobs:
   sentryRelease:
