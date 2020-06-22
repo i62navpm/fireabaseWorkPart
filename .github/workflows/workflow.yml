@@ -60,6 +60,7 @@ jobs:
         uses: coverallsapp/github-action@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/frontend/coverage/lcov.info
 
   e2eTest:
     name: E2E test
