@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.6 (2020-06-22)
+
+
+### Bug Fixes
+
+* change refs tags ([7e03c44](https://github.com/i62navpm/firebaseWorkPart/commit/7e03c44325be52825fa8d8540e0f1759780b3a4b))
+
+
+
+
+
 ## 0.1.5 (2020-06-22)
 
 
