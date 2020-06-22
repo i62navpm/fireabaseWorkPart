@@ -1,0 +1,27 @@
+name: WorkPart Sentry Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  sentryRelease:
+    runs-on: ubuntu-latest
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SENTRY_RELEASE: ${{ github.ref }}
+      SENTRY_ORG: i62navpm
+      SENTRY_PROJECT: work-part
+      SENTRY_DEPLOY_ENVIRONMENT: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create new Sentry release
+        run: |
+          curl -sL https://sentry.io/get-cli/ | bash
+
+          sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+          sentry-cli releases set-commits --auto $SENTRY_RELEASE
+          sentry-cli releases finalize $SENTRY_RELEASE
+
+          # Create new deploy for this Sentry release
+          sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_DEPLOY_ENVIRONMENT
