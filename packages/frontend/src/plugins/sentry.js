@@ -4,12 +4,10 @@ import { Vue as VueIntegration } from '@sentry/integrations'
 import config from '@/config/sentry'
 import { version } from '@/../package.json'
 
-if (process.env.NODE_ENV === 'production') {
-  Sentry.init({
-    dsn: config.dsn,
-    integrations: [new VueIntegration({ Vue, attachProps: true })],
-    release: `frontend@${version}`,
-  })
-}
+Sentry.init({
+  dsn: config.dsn,
+  integrations: [new VueIntegration({ Vue, attachProps: true })],
+  release: `frontend@${version}`,
+})
 
 export default Sentry
