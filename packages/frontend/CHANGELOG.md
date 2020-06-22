@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.9 (2020-06-22)
+
+
+### Bug Fixes
+
+* upload png images ([7cebb94](https://github.com/i62navpm/firebaseWorkPart/commit/7cebb94f56efb55c0d66ef8a13f0e46105c16467))
+
+
+
+
+
 ## 0.1.8 (2020-06-22)
 
 **Note:** Version bump only for package @i62navpm/frontend
