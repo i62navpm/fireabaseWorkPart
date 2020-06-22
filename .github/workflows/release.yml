@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      SENTRY_RELEASE: ${{ github.ref }}
+      SENTRY_RELEASE: v0.1.0
       SENTRY_ORG: i62navpm
       SENTRY_PROJECT: work-part
       SENTRY_DEPLOY_ENVIRONMENT: production
