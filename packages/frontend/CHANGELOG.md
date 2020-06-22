@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.5 (2020-06-22)
+
+
+### Bug Fixes
+
+* create sentry release ([44dc803](https://github.com/i62navpm/firebaseWorkPart/commit/44dc80330543144281e6ba366579a33018a9e272))
+
+
+
+
+
 ## 0.1.4 (2020-06-22)
 
 
