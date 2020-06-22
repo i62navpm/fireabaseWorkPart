@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.4 (2020-06-22)
+
+
+### Bug Fixes
+
+* change event type on release ([929a7bf](https://github.com/i62navpm/firebaseWorkPart/commit/929a7bf18d2492f078b924a4b27106e7f1621eee))
+
+
+
+
+
 ## 0.1.3 (2020-06-22)
 
 
