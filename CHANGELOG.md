@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.2 (2020-06-22)
+
+
+### Bug Fixes
+
+* png to webp ([441f975](https://github.com/i62navpm/firebaseWorkPart/commit/441f975bbef3c62469a6190ad02dd6fb8394ee9c))
+
+
+
+
+
 ## [0.1.1](https://github.com/i62navpm/firebaseWorkPart/compare/v0.1.0...v0.1.1) (2020-06-22)
 
 **Note:** Version bump only for package @i62navpm/work-part
