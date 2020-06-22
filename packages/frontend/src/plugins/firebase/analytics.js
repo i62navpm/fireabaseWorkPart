@@ -1,4 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/analytics'
 
-export const analytics = firebase.analytics()
+if (process.env.NODE_ENV === 'production') {
+  firebase.analytics()
+}
