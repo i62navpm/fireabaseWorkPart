@@ -10,6 +10,10 @@ import vuetify from './plugins/vuetify'
 import App from './App.vue'
 import './scss/print.scss'
 
+if (process.env.NODE_ENV === 'production') {
+  import('./plugins/firebase/analytics')
+}
+
 Vue.config.productionTip = false
 
 new Vue({
