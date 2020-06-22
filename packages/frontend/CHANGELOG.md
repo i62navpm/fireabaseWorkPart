@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.3 (2020-06-22)
+
+
+### Bug Fixes
+
+* change type relase event ([931ef66](https://github.com/i62navpm/firebaseWorkPart/commit/931ef669b00d1afb657aff6a7f3992d9c43e7e0c))
+
+
+
+
+
 ## 0.1.2 (2020-06-22)
 
 
