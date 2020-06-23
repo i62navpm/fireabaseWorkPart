@@ -135,7 +135,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-
     steps:
       - uses: actions/checkout@v2
       - name: Git config user
@@ -150,19 +149,12 @@ jobs:
         run: npx lerna version -y
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  sentryRelease:
-    needs: [createRelease]
-    name: Create Sentry release
-    runs-on: ubuntu-latest
-    env:
-      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      SENTRY_ORG: i62navpm
-      SENTRY_PROJECT: work-part
-      SENTRY_DEPLOY_ENVIRONMENT: production
-    steps:
-      - uses: actions/checkout@v2
       - name: Create new Sentry release
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: i62navpm
+          SENTRY_PROJECT: work-part
+          SENTRY_DEPLOY_ENVIRONMENT: production
         run: |
           curl -sL https://sentry.io/get-cli/ | bash
           SENTRY_RELEASE=v$(node -p "require('./lerna.json').version")
