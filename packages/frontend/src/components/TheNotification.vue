@@ -4,13 +4,15 @@
     right
     :value="notification.show"
     :color="notification.color"
-    multi-line
     @input="onChange"
   >
     {{ notification.message }}
-    <v-btn dark text @click="$store.dispatch('closeNotification')">
-      Cerrar
-    </v-btn>
+
+    <template v-slot:action>
+      <v-btn dark text @click="$store.dispatch('closeNotification')">
+        Cerrar
+      </v-btn>
+    </template>
   </v-snackbar>
 </template>
 
