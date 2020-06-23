@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.12 (2020-06-23)
+
+
+### Bug Fixes
+
+* sentry release version ([ed651e4](https://github.com/i62navpm/firebaseWorkPart/commit/ed651e45c78e6173ffc0bc1e9a1f1251156b9531))
+
+
+
+
+
 ## 0.1.11 (2020-06-23)
 
 **Note:** Version bump only for package @i62navpm/frontend
