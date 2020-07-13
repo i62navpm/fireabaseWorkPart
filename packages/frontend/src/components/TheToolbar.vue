@@ -4,7 +4,7 @@
       <router-link to="/">
         <v-list-item class="px-0">
           <v-list-item-avatar class="mr-3">
-            <v-img src="../assets/logo.webp" contain></v-img>
+            <v-img src="../assets/logo.png" contain></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
             Nóminas
