@@ -26,7 +26,11 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-address-input v-model="work.address" />
+                <v-text-field
+                  v-model="work.address"
+                  name="address"
+                  label="Dirección"
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -51,13 +55,9 @@
 </template>
 
 <script>
-import VAddressInput from '@/components/VAddressInput'
 import loadingMixin from '@/mixins/loading'
 
 export default {
-  components: {
-    VAddressInput,
-  },
   mixins: [loadingMixin],
   data: () => ({
     open: false,

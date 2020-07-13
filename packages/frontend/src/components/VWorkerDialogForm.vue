@@ -50,7 +50,11 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-address-input v-model="worker.address" />
+                <v-text-field
+                  v-model="worker.address"
+                  name="address"
+                  label="Dirección"
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
@@ -102,14 +106,10 @@
 
 <script>
 import { mask } from 'vue-the-mask'
-import VAddressInput from '@/components/VAddressInput'
 import loadingMixin from '@/mixins/loading'
 
 export default {
   directives: { mask },
-  components: {
-    VAddressInput,
-  },
   mixins: [loadingMixin],
   data: () => ({
     open: false,
