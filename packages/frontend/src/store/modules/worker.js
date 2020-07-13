@@ -39,7 +39,7 @@ export default {
         )
     ),
     createIncomeEvent: firestoreAction(
-      ({ rootGetters }, { year, month, events, workers }) => {
+      ({ rootGetters, getters }, { year, month, events, workers }) => {
         const batch = db.batch()
 
         workers.forEach((workerId) => {
@@ -53,7 +53,11 @@ export default {
               .doc(year)
               .collection(month)
               .doc()
-            batch.set(monthRef, event)
+            batch.set(monthRef, {
+              ...event,
+              amount:
+                getters.getWorkerRef(workerId)[event.salary] || event.amount,
+            })
           })
         })
 
