@@ -90,16 +90,7 @@ export default {
       this.$refs.workPlaceForm.openDialog(work)
     },
     async changeInput(works) {
-      try {
-        const refs = await Promise.all(
-          works.map((work) =>
-            work.id ? work : this.$store.dispatch('getWorkRef', work)
-          )
-        )
-        this.$emit('input', refs)
-      } catch (err) {
-        this.notifyError('Error al obtener las referencias')
-      }
+      this.$emit('input', works)
     },
     async saveWorkPlace(cb) {
       try {

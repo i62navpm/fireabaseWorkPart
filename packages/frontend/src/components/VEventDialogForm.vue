@@ -94,6 +94,15 @@ export default {
         event: this.event,
       })
     },
+    async getWorkRefs(works = []) {
+      try {
+        return await Promise.all(
+          works.map(({ id }) => this.$store.dispatch('getWorkRef', id))
+        )
+      } catch (err) {
+        this.notifyError('Error al obtener las referencias')
+      }
+    },
     async saveIncomeEvent(cb) {
       try {
         const { id, ...event } = { ...this.$refs.eventIncomeForm.event }
@@ -106,6 +115,8 @@ export default {
           month: this.month,
           year: this.year,
         }
+
+        data.event.work = await this.getWorkRefs(data.event.work)
 
         if (action === 'updateIncomeEvent') {
           await this.dispatchEvent(action, data)

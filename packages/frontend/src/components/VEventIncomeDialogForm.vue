@@ -81,7 +81,7 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-work-place-select v-model="event.work" />
+                <v-work-place-select v-model="works" />
               </v-col>
             </v-row>
           </v-container>
@@ -144,6 +144,14 @@ export default {
       set(salary) {
         this.event.amount = this.worker[salary] || this.worker['fullSalary']
         this.event.salary = salary
+      },
+    },
+    works: {
+      get() {
+        return this.event.work ? this.event.work.map(({ id }) => id) : []
+      },
+      set(works) {
+        this.event.work = works.map((id) => ({ id }))
       },
     },
     avatarUrl() {
