@@ -2,13 +2,29 @@
   <v-dialog v-model="open" max-width="600" @click:outside="closeDialog">
     <v-form ref="form" v-model="valid" @submit.prevent>
       <v-card>
-        <v-card-title class="headline">
-          Evento
-          <v-spacer></v-spacer>
-          <v-btn icon @click="closeDialog">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
+        <v-list>
+          <v-list-item two-line>
+            <v-list-item-avatar>
+              <v-img :src="avatarUrl" :alt="worker.name"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="headline mb-1">
+                {{ worker.name }}
+              </v-list-item-title>
+              <v-list-item-subtitle class="d-flex align-center">
+                <v-icon small color="success">mdi-arrow-up-bold</v-icon>
+                <span class="mr-2">{{ worker.fullSalary }}€</span>
+                <v-icon small color="error">mdi-arrow-down-bold</v-icon>
+                <span>{{ worker.halfSalary }}€</span>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon @click="closeDialog">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
 
         <v-card-text>
           <v-container>
@@ -106,6 +122,9 @@ export default {
         this.event.amount = this.worker[salary] || this.worker['fullSalary']
         this.event.salary = salary
       },
+    },
+    avatarUrl() {
+      return `https://avatars.dicebear.com/api/male/${this.worker.id}.svg`
     },
   },
   methods: {
