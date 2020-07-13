@@ -39,19 +39,22 @@ export default {
         )
     ),
     createIncomeEvent: firestoreAction(
-      ({ rootGetters }, { workerId, year, month, events }) => {
+      ({ rootGetters }, { year, month, events, workers }) => {
         const batch = db.batch()
-        events.forEach((event) => {
-          const monthRef = db
-            .collection('users')
-            .doc(rootGetters.getUser.email)
-            .collection('workforce')
-            .doc(workerId)
-            .collection('income')
-            .doc(year)
-            .collection(month)
-            .doc()
-          batch.set(monthRef, event)
+
+        workers.forEach((workerId) => {
+          events.forEach((event) => {
+            const monthRef = db
+              .collection('users')
+              .doc(rootGetters.getUser.email)
+              .collection('workforce')
+              .doc(workerId)
+              .collection('income')
+              .doc(year)
+              .collection(month)
+              .doc()
+            batch.set(monthRef, event)
+          })
         })
 
         return batch.commit()

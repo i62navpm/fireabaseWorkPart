@@ -80,7 +80,8 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="12" class="pt-0">
+                <v-worker-select v-if="!event.id" v-model="workers" />
                 <v-work-place-select v-model="works" />
               </v-col>
             </v-row>
@@ -116,10 +117,11 @@
 
 <script>
 import VWorkPlaceSelect from '@/components/VWorkPlaceSelect'
+import VWorkerSelect from '@/components/VWorkerSelect'
 import loadingMixin from '@/mixins/loading'
 
 export default {
-  components: { VWorkPlaceSelect },
+  components: { VWorkPlaceSelect, VWorkerSelect },
   mixins: [loadingMixin],
   props: {
     worker: {
@@ -132,6 +134,7 @@ export default {
     open: false,
     valid: false,
     event: {},
+    workers: [],
     rules: {
       required: (value) => !!value || 'Este campo es obligatorio.',
     },

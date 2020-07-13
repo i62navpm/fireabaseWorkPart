@@ -121,6 +121,7 @@ export default {
         if (action === 'updateIncomeEvent') {
           await this.dispatchEvent(action, data)
         } else {
+          data.workers = [this.worker.id, ...this.$refs.eventIncomeForm.workers]
           data.events = this.date.map((date) => ({
             ...data.event,
             date,
